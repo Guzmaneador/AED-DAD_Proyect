@@ -18,7 +18,7 @@ public class EmpleadoDAOJDBImpl implements EmpleadoDAO{
     Connection conexion ;
     DataSource pool = new PoolConexiones().getPoolConexion();
     ResultSet resultado ;
-    private final String SQL_SELECT_EMPLEADOS= "SELECT nombre FROM empleados";
+    private final String SQL_SELECT_EMPLEADOS= "SELECT * FROM empleados WHERE nombre=?";
     private final String SQL_SELECT_PASSWORD="SELECT nif FROM empleados WHERE id=?";
     private final String SQL_UPDATE = "UPDATE empleados SET nif=? nombre=? tipo=? oficio=? fecha_alta=? salario=? id=? WHERE nombre=?";
 
@@ -36,16 +36,25 @@ public class EmpleadoDAOJDBImpl implements EmpleadoDAO{
        miPreStatment.setString(5, empleado.getFechaAlta());
        miPreStatment.setString(6, String.valueOf(empleado.getSalario()));
        miPreStatment.setString(7, Integer.toString(empleado.getId()));
+       miPreStatment.setString(8, empleado.getNombre());
        resultado=miPreStatment.executeQuery();
        return "Empleado Actualizado correctamente";
 
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 
     }
-    public EmpleadoVO optenerEmpleado() throws SQLException {
-        
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
+    public EmpleadoVO optenerEmpleado(String nombre) throws SQLException {
+       conexion = pool.getConnection();
+       EmpleadoVO empleado;
+       PreparedStatement miPreStatment= conexion.prepareCall(SQL_UPDATE);
+       miPreStatment.setString(1, nombre);
+       resultado=miPreStatment.executeQuery();
+       if(resultado.next()){
+           empleado = new EmpleadoVO(resultado.getString("nif"),resultado.getString("nombre"),resultado.getString("tipo"),resultado.getString("oficio"),resultado.getDate("fecha_alta"),resultado.getDouble("salario"),resultado.getInt("id"));
+           return empleado;
+       }else{
+            throw new UnsupportedOperationException("Error al hacer la caonsulta optenerEmpleado"); //To change body of generated methods, choose Tools | Templates.
+       }
     }
   
 
