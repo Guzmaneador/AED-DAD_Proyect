@@ -293,6 +293,24 @@ public class EmpleadosGUI extends javax.swing.JFrame {
 
     private void rellenarFormulario() {
         nombreTextField.setText(empleado.getNombre());
+        nifTextField.setText(empleado.getNif());
+        oficioTextField.setText(empleado.getOficio());
+        switch (empleado.getTipo()) {
+            case "Empleado":
+                empleadoRadioButton.setSelected(true);
+                break;
+            case "Administrativo":
+                administrativoRadioButton.setSelected(true);
+                break;
+            default:
+                throw new AssertionError();
+        }
+        fechaAltaTextField.setText(empleado.getFechaAlta());
+//        salarioTextField.setText(empleado.getSalario());
+//        idTextField.setText(empleado.getId());
+        
+        
+        
         
     }
 }
