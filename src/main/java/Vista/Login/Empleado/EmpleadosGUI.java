@@ -306,8 +306,8 @@ public class EmpleadosGUI extends javax.swing.JFrame {
                 throw new AssertionError();
         }
         fechaAltaTextField.setText(empleado.getFechaAlta());
-//        salarioTextField.setText(empleado.getSalario());
-//        idTextField.setText(empleado.getId());
+        salarioTextField.setText(String.valueOf(empleado.getSalario()));
+        idTextField.setText(Integer.toString(empleado.getId()));
         
         
         

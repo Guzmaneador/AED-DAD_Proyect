@@ -1,5 +1,7 @@
 package Modelo;
 
+import Modelo.EmpleadosDAO.EmpleadoDAOJDBImpl;
+import Modelo.EmpleadosDAO.EmpleadoVO;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,6 +17,8 @@ import java.util.logging.Logger;
  */
 public class ModeloImpl implements Modelo{
     private Connection conexion;
+    EmpleadoDAOJDBImpl empleadoDao = new EmpleadoDAOJDBImpl();
+
     
     
     public void start(ArrayList<String> comandosSQL) throws SQLException{
@@ -24,18 +28,22 @@ public class ModeloImpl implements Modelo{
         int resultadoUpdate;
         for (String comando : comandosSQL) {
                  resultadoUpdate = crearDBTablas.executeUpdate(comando);
-                 System.out.println(resultadoUpdate);
-        }
-
-//        conexion.close();
-    }
-    public void login(ArrayList<String> userPass){
-        try {
-            Login miLogin = new Login(userPass,conexion);
-        } catch (SQLException ex) {
-            Logger.getLogger(ModeloImpl.class.getName()).log(Level.SEVERE, null, ex);
+//                 System.out.println(resultadoUpdate);
         }
         
+//        conexion.close();
+    }
+    @Override
+    public EmpleadoVO login(ArrayList<String> userPass)throws SQLException{
+            /*En caso de que la clase login devuelva un nombre bacio devolvera 
+            un objeto EmpleadoVo vacio y con el tipo logeado= false*/
+            Login miLogin = new Login(userPass,conexion);  
+            String nombre = miLogin.analizarDatos();
+            if(nombre != "")
+                return empleadoDao.optenerEmpleado(nombre);
+            else
+               return new EmpleadoVO(false);
+
     }
 
 }

@@ -26,7 +26,7 @@ public class Login {
         this.usuario = userPass.get(0);
         this.contraseña = userPass.get(1);
         this.conexion=conexion;
-        analizarDatos();
+//        analizarDatos();Antonio
         /*
         Modelo devuelve un objeto EmpleadosVO de tipo empleado el cual trata la interfa
         Cambia los valores de de este en caso de que ek usuario los modifique 
@@ -34,16 +34,19 @@ public class Login {
         */
         
     }
-    public void analizarDatos() throws SQLException{
+    public String  analizarDatos() throws SQLException{
         if(verificarUser()){
             obtenerNif();
             if(compararPassword()){
                 System.out.println("--USUARIO LOGEADO--");
+                return usuario;
             }else{
                 System.out.println("Datos Incorrectos2");
+                return "";
             }
         }else{
             System.out.println("Datos incorrectos");
+            return "";
         }
     }
     

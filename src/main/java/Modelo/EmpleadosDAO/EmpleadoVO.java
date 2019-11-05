@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
  * @author Guzman
  */
 public class EmpleadoVO {
+    private boolean logeado =true;
     private String nif;
     private String nombre;
     private String tipo;
@@ -16,7 +17,13 @@ public class EmpleadoVO {
     private double salario;
     private int id;
     private String password;
+    
+    
     public EmpleadoVO() {
+        
+    }
+    public EmpleadoVO(boolean logeado) {
+        this.logeado=logeado;
     }
 
     public EmpleadoVO(String nif, String nombre, String tipo, String oficio, Date fechaAlta, double salario, int id) {
@@ -93,6 +100,14 @@ public class EmpleadoVO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isLogeado() {
+        return logeado;
+    }
+
+    public void setLogeado(boolean logeado) {
+        this.logeado = logeado;
     }
     
     
