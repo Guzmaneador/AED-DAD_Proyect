@@ -3,6 +3,7 @@ package Modelo.EmpleadosDAO;
 import Modelo.PoolConexiones;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.sql.DataSource;
 
@@ -16,16 +17,14 @@ import javax.sql.DataSource;
 public class EmpleadoDAOJDBImpl implements EmpleadoDAO{
     Connection conexion ;
     DataSource pool = new PoolConexiones().getPoolConexion();
+    ResultSet resultado ;
     private final String SQL_SELECT_EMPLEADOS= "SELECT nombre FROM empleados";
     private final String SQL_SELECT_PASSWORD="SELECT nif FROM empleados WHERE id=?";
     private final String SQL_UPDATE = "UPDATE empleados SET nif=? nombre=? tipo=? oficio=? fecha_alta=? salario=? id=? WHERE nombre=?";
 
-//    public EmpleadoDAOJDBImpl() throws SQLException {
-//    }
+    public EmpleadoDAOJDBImpl() {
+    }
     
-    
-    
-
     
     public String update(EmpleadoVO empleado) throws SQLException {
         conexion = pool.getConnection();
@@ -37,8 +36,15 @@ public class EmpleadoDAOJDBImpl implements EmpleadoDAO{
        miPreStatment.setString(5, empleado.getFechaAlta());
        miPreStatment.setString(6, String.valueOf(empleado.getSalario()));
        miPreStatment.setString(7, Integer.toString(empleado.getId()));
+       resultado=miPreStatment.executeQuery();
+       return "Empleado Actualizado correctamente";
 
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+    }
+    public EmpleadoVO optenerEmpleado() throws SQLException {
+        
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 
     }
   
