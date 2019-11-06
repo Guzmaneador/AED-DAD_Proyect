@@ -20,7 +20,7 @@ public class EmpleadoDAOJDBImpl implements EmpleadoDAO{
     ResultSet resultado ;
     private final String SQL_SELECT_EMPLEADO= "SELECT * FROM empleados WHERE nombre=?";
     private final String SQL_SELECT_PASSWORD="SELECT nif FROM empleados WHERE id=?";
-    private final String SQL_UPDATE = "UPDATE empleados SET nif=? nombre=? tipo=? oficio=? fecha_alta=? salario=? id=? WHERE nombre=?";
+    private final String SQL_UPDATE = "UPDATE empleados SET nif=?, nombre=?, tipo=?, oficio=?, fecha_alta=?, salario=?, id=? WHERE nombre=?";
 
     public EmpleadoDAOJDBImpl() {
     }
@@ -33,11 +33,12 @@ public class EmpleadoDAOJDBImpl implements EmpleadoDAO{
        miPreStatment.setString(2, empleado.getNombre());
        miPreStatment.setString(3, empleado.getTipo());
        miPreStatment.setString(4, empleado.getOficio());
-       miPreStatment.setString(5, empleado.getFechaAlta());
-       miPreStatment.setString(6, String.valueOf(empleado.getSalario()));
-       miPreStatment.setString(7, Integer.toString(empleado.getId()));
+       miPreStatment.setDate(5, empleado.getFechaAltaDate());
+       miPreStatment.setDouble(6, empleado.getSalario());
+       miPreStatment.setInt(7, empleado.getId());
        miPreStatment.setString(8, empleado.getNombre());
-       resultado=miPreStatment.executeQuery();
+        System.out.println(miPreStatment);
+       miPreStatment.executeUpdate();
        return "Empleado Actualizado correctamente";
 
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

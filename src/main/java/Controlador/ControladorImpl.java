@@ -33,6 +33,7 @@ public class ControladorImpl implements Controlador {
             Logger.getLogger(ControladorImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    @Override
     public void login() throws SQLException{
         empleado=modelo.login(vista.solicitarLogin());
         if(empleado.isLogeado()){
@@ -41,7 +42,7 @@ public class ControladorImpl implements Controlador {
             login();
         }
     }
-    public void analizarTipo() throws SQLException{
+    private void analizarTipo() throws SQLException{
         switch (empleado.getTipo()) {
             case "Empleado":
                 EmpleadosGUI EmplGui = new EmpleadosGUI(empleado);
@@ -57,6 +58,12 @@ public class ControladorImpl implements Controlador {
         }
         
     }
+    
+    @Override
+    public void actualizarEmpleado(EmpleadoVO empleado) throws SQLException{
+        modelo.actualizarEmpleado(empleado);
+    }
+    
     
    
 

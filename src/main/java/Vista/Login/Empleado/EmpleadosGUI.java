@@ -1,6 +1,12 @@
 package Vista.Login.Empleado;
 
+import Controlador.*;
 import Modelo.EmpleadosDAO.EmpleadoVO;
+import Modelo.ModeloImpl;
+import Vista.VistaImpl;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -12,9 +18,10 @@ public class EmpleadosGUI extends javax.swing.JFrame {
      * Creates new form EmpleadosGUI
      */
     EmpleadoVO empleado;
+    Controlador controlador = new ControladorImpl(new ModeloImpl(),new VistaImpl());
     public EmpleadosGUI(EmpleadoVO empleado) {
         initComponents();
-//        new EmpleadosGUI().setVisible(true);
+        passwordPanel.setVisible(false);
         this.empleado=empleado;
         rellenarFormulario();
     }
@@ -94,6 +101,11 @@ public class EmpleadosGUI extends javax.swing.JFrame {
         administrativoRadioButton.setText("Administrativo");
 
         passwordCheckBox.setText("Cambiar Contraseña");
+        passwordCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordCheckBoxActionPerformed(evt);
+            }
+        });
 
         fechaAltaTextField.setText("aaaa-mm-dd");
 
@@ -121,6 +133,11 @@ public class EmpleadosGUI extends javax.swing.JFrame {
         );
 
         jButton1.setText("Actualizar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -231,6 +248,26 @@ public class EmpleadosGUI extends javax.swing.JFrame {
     private void nombreTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nombreTextFieldActionPerformed
+
+    private void passwordCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordCheckBoxActionPerformed
+        if(passwordCheckBox.isSelected())
+            passwordPanel.setVisible(true);
+        else
+            passwordPanel.setVisible(false);
+        
+    }//GEN-LAST:event_passwordCheckBoxActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            if(passwordCheckBox.isSelected()){
+                
+            }else{
+            controlador.actualizarEmpleado(empleado);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(EmpleadosGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 //    /**
 //     * @param args the command line arguments

@@ -73,6 +73,9 @@ public class EmpleadoVO {
         String fechaComoCadena = sdf.format(fechaAlta);
         return fechaComoCadena;
     }
+    public Date getFechaAltaDate() {
+        return fechaAlta;
+    }
 
     public void setFechaAlta(Date fechaAlta) {
         this.fechaAlta = fechaAlta;

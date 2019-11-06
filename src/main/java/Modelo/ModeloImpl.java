@@ -45,5 +45,9 @@ public class ModeloImpl implements Modelo{
                return new EmpleadoVO(false);
 
     }
+    
+    public void actualizarEmpleado(EmpleadoVO empleado) throws SQLException{
+        empleadoDao.update(empleado);
+    }
 
 }
