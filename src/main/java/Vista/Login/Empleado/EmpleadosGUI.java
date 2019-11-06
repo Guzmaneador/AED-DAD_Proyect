@@ -14,6 +14,7 @@ public class EmpleadosGUI extends javax.swing.JFrame {
     EmpleadoVO empleado;
     public EmpleadosGUI(EmpleadoVO empleado) {
         initComponents();
+//        new EmpleadosGUI().setVisible(true);
         this.empleado=empleado;
         rellenarFormulario();
     }

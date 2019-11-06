@@ -39,7 +39,7 @@ public class ModeloImpl implements Modelo{
             un objeto EmpleadoVo vacio y con el tipo logeado= false*/
             Login miLogin = new Login(userPass,conexion);  
             String nombre = miLogin.analizarDatos();
-            if(nombre != "")
+            if(!nombre.equals(""))
                 return empleadoDao.optenerEmpleado(nombre);
             else
                return new EmpleadoVO(false);

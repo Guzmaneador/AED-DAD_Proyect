@@ -18,7 +18,7 @@ public class EmpleadoDAOJDBImpl implements EmpleadoDAO{
     Connection conexion ;
     DataSource pool = new PoolConexiones().getPoolConexion();
     ResultSet resultado ;
-    private final String SQL_SELECT_EMPLEADOS= "SELECT * FROM empleados WHERE nombre=?";
+    private final String SQL_SELECT_EMPLEADO= "SELECT * FROM empleados WHERE nombre=?";
     private final String SQL_SELECT_PASSWORD="SELECT nif FROM empleados WHERE id=?";
     private final String SQL_UPDATE = "UPDATE empleados SET nif=? nombre=? tipo=? oficio=? fecha_alta=? salario=? id=? WHERE nombre=?";
 
@@ -46,7 +46,7 @@ public class EmpleadoDAOJDBImpl implements EmpleadoDAO{
     public EmpleadoVO optenerEmpleado(String nombre) throws SQLException {
        conexion = pool.getConnection();
        EmpleadoVO empleado;
-       PreparedStatement miPreStatment= conexion.prepareCall(SQL_UPDATE);
+       PreparedStatement miPreStatment= conexion.prepareCall(SQL_SELECT_EMPLEADO);
        miPreStatment.setString(1, nombre);
        resultado=miPreStatment.executeQuery();
        if(resultado.next()){

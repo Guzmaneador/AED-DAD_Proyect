@@ -45,6 +45,9 @@ public class ControladorImpl implements Controlador {
         switch (empleado.getTipo()) {
             case "Empleado":
                 EmpleadosGUI EmplGui = new EmpleadosGUI(empleado);
+                EmplGui.setVisible(true);
+                EmplGui.setLocationRelativeTo(null);
+                
                 break;
             case "Administrativo":
 //                administrativoRadioButton.setSelected(true);
