@@ -139,9 +139,9 @@
               <Component id="passwordCheckBox" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="passwordPanel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="17" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -249,9 +249,10 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="passwordField2" min="-2" pref="128" max="-2" attributes="0"/>
-                      <Component id="passwordField1" min="-2" pref="128" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="passwordField2" pref="128" max="32767" attributes="0"/>
+                      <Component id="passwordField1" pref="128" max="32767" attributes="0"/>
+                      <Component id="nCoicidenLabel" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="36" max="32767" attributes="0"/>
               </Group>
@@ -261,8 +262,10 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
+                  <Component id="nCoicidenLabel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="passwordField1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="18" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="passwordField2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -273,6 +276,11 @@
         <Component class="javax.swing.JPasswordField" name="passwordField1">
         </Component>
         <Component class="javax.swing.JPasswordField" name="passwordField2">
+        </Component>
+        <Component class="javax.swing.JLabel" name="nCoicidenLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="*No coiciden "/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

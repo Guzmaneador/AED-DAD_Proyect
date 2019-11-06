@@ -10,5 +10,6 @@ import java.sql.SQLException;
 public interface Controlador {
     public void iniciar();
     public void actualizarEmpleado(EmpleadoVO empleado) throws SQLException;
+    public void actualizarEmpleado(EmpleadoVO empleado,String password) throws SQLException;
     public void login() throws SQLException;
 }

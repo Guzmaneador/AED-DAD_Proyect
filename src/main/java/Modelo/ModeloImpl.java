@@ -49,5 +49,8 @@ public class ModeloImpl implements Modelo{
     public void actualizarEmpleado(EmpleadoVO empleado) throws SQLException{
         empleadoDao.update(empleado);
     }
+    public void actualizarEmpleado(EmpleadoVO empleado,String password) throws SQLException{
+        empleadoDao.update(empleado,password);
+    }
 
 }

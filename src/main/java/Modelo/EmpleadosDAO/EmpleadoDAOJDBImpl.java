@@ -19,7 +19,7 @@ public class EmpleadoDAOJDBImpl implements EmpleadoDAO{
     DataSource pool = new PoolConexiones().getPoolConexion();
     ResultSet resultado ;
     private final String SQL_SELECT_EMPLEADO= "SELECT * FROM empleados WHERE nombre=?";
-    private final String SQL_SELECT_PASSWORD="SELECT nif FROM empleados WHERE id=?";
+    private final String SQL_UPDATE_PASSWORD="UPDATE login SET password=AES_ENCRYPT('NoLoVesJeJe', ?) WHERE nif=?";
     private final String SQL_UPDATE = "UPDATE empleados SET nif=?, nombre=?, tipo=?, oficio=?, fecha_alta=?, salario=?, id=? WHERE nombre=?";
 
     public EmpleadoDAOJDBImpl() {
@@ -37,13 +37,36 @@ public class EmpleadoDAOJDBImpl implements EmpleadoDAO{
        miPreStatment.setDouble(6, empleado.getSalario());
        miPreStatment.setInt(7, empleado.getId());
        miPreStatment.setString(8, empleado.getNombre());
-        System.out.println(miPreStatment);
+       System.out.println(miPreStatment);
        miPreStatment.executeUpdate();
        return "Empleado Actualizado correctamente";
-
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
     }
+/*
+    Sobre craga de metodos al tener diferente firma en la cual una incluira la contraseña y en la otra no
+    */
+    public String update (EmpleadoVO empleado,String password) throws SQLException {
+        conexion = pool.getConnection();
+       PreparedStatement miPreStatment= conexion.prepareCall(SQL_UPDATE);
+       miPreStatment.setString(1, empleado.getNif());
+       miPreStatment.setString(2, empleado.getNombre());
+       miPreStatment.setString(3, empleado.getTipo());
+       miPreStatment.setString(4, empleado.getOficio());
+       miPreStatment.setDate(5, empleado.getFechaAltaDate());
+       miPreStatment.setDouble(6, empleado.getSalario());
+       miPreStatment.setInt(7, empleado.getId());
+       miPreStatment.setString(8, empleado.getNombre());
+        System.out.println(miPreStatment);
+       miPreStatment.executeUpdate();
+       
+       conexion = pool.getConnection();
+       PreparedStatement miPreStatment2= conexion.prepareCall(SQL_UPDATE_PASSWORD);
+       miPreStatment2.setString(1, password);
+       miPreStatment2.setString(2, empleado.getNif());
+       miPreStatment2.executeUpdate();
+       return "Empleado Actualizado correctamente";
+    }
+    
+    
     public EmpleadoVO optenerEmpleado(String nombre) throws SQLException {
        conexion = pool.getConnection();
        EmpleadoVO empleado;

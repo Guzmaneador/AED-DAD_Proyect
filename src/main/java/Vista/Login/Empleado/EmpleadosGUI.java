@@ -22,6 +22,7 @@ public class EmpleadosGUI extends javax.swing.JFrame {
     public EmpleadosGUI(EmpleadoVO empleado) {
         initComponents();
         passwordPanel.setVisible(false);
+        nCoicidenLabel.setVisible(false);
         this.empleado=empleado;
         rellenarFormulario();
     }
@@ -56,6 +57,7 @@ public class EmpleadosGUI extends javax.swing.JFrame {
         passwordPanel = new javax.swing.JPanel();
         passwordField1 = new javax.swing.JPasswordField();
         passwordField2 = new javax.swing.JPasswordField();
+        nCoicidenLabel = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -111,23 +113,28 @@ public class EmpleadosGUI extends javax.swing.JFrame {
 
         passwordPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        nCoicidenLabel.setText("*No coiciden ");
+
         javax.swing.GroupLayout passwordPanelLayout = new javax.swing.GroupLayout(passwordPanel);
         passwordPanel.setLayout(passwordPanelLayout);
         passwordPanelLayout.setHorizontalGroup(
             passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(passwordPanelLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(passwordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(passwordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(passwordField2, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                    .addComponent(passwordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                    .addComponent(nCoicidenLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         passwordPanelLayout.setVerticalGroup(
             passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(passwordPanelLayout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(nCoicidenLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(passwordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(passwordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -229,9 +236,9 @@ public class EmpleadosGUI extends javax.swing.JFrame {
                 .addComponent(passwordCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(passwordPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -254,15 +261,22 @@ public class EmpleadosGUI extends javax.swing.JFrame {
             passwordPanel.setVisible(true);
         else
             passwordPanel.setVisible(false);
-        
+            nCoicidenLabel.setVisible(false);    
     }//GEN-LAST:event_passwordCheckBoxActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             if(passwordCheckBox.isSelected()){
-                
+                if(compararPassword()){
+                    actualizarDatosEmpleado();
+                    controlador.actualizarEmpleado(empleado,new String (passwordField1.getPassword()));
+                    nCoicidenLabel.setVisible(false);
+                }else{
+                    nCoicidenLabel.setVisible(true);
+                }              
             }else{
-            controlador.actualizarEmpleado(empleado);
+                actualizarDatosEmpleado();
+                controlador.actualizarEmpleado(empleado);
             }
         } catch (SQLException ex) {
             Logger.getLogger(EmpleadosGUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -313,6 +327,7 @@ public class EmpleadosGUI extends javax.swing.JFrame {
     private javax.swing.JLabel idLabel;
     private javax.swing.JTextField idTextField;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel nCoicidenLabel;
     private javax.swing.JLabel nifLabel;
     private javax.swing.JTextField nifTextField;
     private javax.swing.JLabel nombreLabel;
@@ -346,9 +361,18 @@ public class EmpleadosGUI extends javax.swing.JFrame {
         fechaAltaTextField.setText(empleado.getFechaAlta());
         salarioTextField.setText(String.valueOf(empleado.getSalario()));
         idTextField.setText(Integer.toString(empleado.getId()));
+    }
+    private void actualizarDatosEmpleado(){
+        empleado.setNif(nifTextField.getText());
+        empleado.setNombre(nombreTextField.getText());
+        empleado.setOficio(oficioTextField.getText());
+    }
+    private boolean compararPassword(){
+        boolean coinciden = false;
+        if(new String(passwordField1.getPassword()).equals(new String (passwordField2.getPassword())))
+            coinciden=true;
         
-        
-        
-        
+        return coinciden;
+            
     }
 }
