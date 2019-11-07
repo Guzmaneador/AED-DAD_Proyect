@@ -1,5 +1,6 @@
 package Modelo;
 
+import Modelo.DepartamentosDAO.*;
 import Modelo.EmpleadosDAO.EmpleadoDAOJDBImpl;
 import Modelo.EmpleadosDAO.EmpleadoVO;
 import java.sql.Connection;
@@ -18,6 +19,7 @@ import java.util.logging.Logger;
 public class ModeloImpl implements Modelo{
     private Connection conexion;
     EmpleadoDAOJDBImpl empleadoDao = new EmpleadoDAOJDBImpl();
+    DepartamentoDAO departamentosDao = new DepartamentoDAOJDBCImpl();
 
     
     
@@ -52,5 +54,9 @@ public class ModeloImpl implements Modelo{
     public void actualizarEmpleado(EmpleadoVO empleado,String password) throws SQLException{
         empleadoDao.update(empleado,password);
     }
+    public ArrayList<Integer> dameDepartamentos(){
+        return departamentosDao.listaDepartamentos();
+    }
+    
 
 }

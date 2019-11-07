@@ -14,4 +14,5 @@ public interface Modelo {
     public EmpleadoVO login(ArrayList<String> userPass)throws SQLException;
     public void actualizarEmpleado(EmpleadoVO empleado) throws SQLException;
     public void actualizarEmpleado(EmpleadoVO empleado,String password) throws SQLException;
+    public ArrayList<Integer> dameDepartamentos();
 }

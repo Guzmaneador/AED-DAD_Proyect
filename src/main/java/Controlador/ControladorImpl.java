@@ -6,6 +6,7 @@ import Modelo.Modelo;
 import Vista.Login.Empleado.EmpleadosGUI;
 import Vista.Vista;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -66,6 +67,11 @@ public class ControladorImpl implements Controlador {
     public void actualizarEmpleado(EmpleadoVO empleado,String password) throws SQLException{
         modelo.actualizarEmpleado(empleado,password);
     }
+    
+    public ArrayList<Integer> obtenerDepartamentos(){
+       return modelo.dameDepartamentos();
+    }
+    
     
     
    
