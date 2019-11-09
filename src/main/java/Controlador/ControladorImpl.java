@@ -68,6 +68,7 @@ public class ControladorImpl implements Controlador {
     public void actualizarEmpleado(EmpleadoVO empleado) throws SQLException{
         modelo.actualizarEmpleado(empleado);
     }
+    @Override
     public void actualizarEmpleado(EmpleadoVO empleado,String password) throws SQLException{
         modelo.actualizarEmpleado(empleado,password);
     }
@@ -75,8 +76,14 @@ public class ControladorImpl implements Controlador {
     public ArrayList<Integer> obtenerDepartamentos(){
        return modelo.dameDepartamentos();
     }
+    @Override
     public DepartamentoVO obtenerDepartamento(int id){
        return modelo.dameDepartamento(id);
+    }
+    @Override
+    public void actualizarDepartamento(DepartamentoVO departamento, int id){
+        modelo.actualizarDepartamento(departamento,id);
+        
     }
     
     

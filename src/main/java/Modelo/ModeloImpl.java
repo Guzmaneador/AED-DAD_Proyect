@@ -60,6 +60,9 @@ public class ModeloImpl implements Modelo{
     public DepartamentoVO dameDepartamento(int id){
         return departamentosDao.dameDepartamentoId(id);
     }
+    public void actualizarDepartamento(DepartamentoVO departamento,int id){
+        departamentosDao.actualizar(departamento,id);
+    }
     
 
 }

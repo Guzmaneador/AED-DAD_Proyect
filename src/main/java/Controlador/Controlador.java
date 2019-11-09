@@ -14,4 +14,5 @@ public interface Controlador {
     public void actualizarEmpleado(EmpleadoVO empleado,String password) throws SQLException;
     public void login() throws SQLException;
     public DepartamentoVO obtenerDepartamento(int id);
+    public void actualizarDepartamento(DepartamentoVO departamento,int id);
 }

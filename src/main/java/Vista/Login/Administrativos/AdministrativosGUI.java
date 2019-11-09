@@ -18,6 +18,7 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         DepartamentoVO empresa;
         EmpleadoVO empleado;
         DepartamentoVO departamento;
+        int id ;
 
     public AdministrativosGUI(ArrayList<Integer> listaDepartamento,EmpleadoVO empleado) {
         initComponents();
@@ -48,6 +49,8 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         ubicacionTextField = new javax.swing.JTextField();
         idSpinner = new javax.swing.JSpinner();
         actualizarButton = new javax.swing.JButton();
+        crearButton = new javax.swing.JButton();
+        borrarButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
 
@@ -100,35 +103,49 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         ubicacionLabel.setText("Ubicacion:");
 
         actualizarButton.setText("Actualizar");
+        actualizarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actualizarButtonActionPerformed(evt);
+            }
+        });
+
+        crearButton.setText("Crear");
+
+        borrarButton.setText("Borrar");
 
         javax.swing.GroupLayout modificarDepartamentoPanelLayout = new javax.swing.GroupLayout(modificarDepartamentoPanel);
         modificarDepartamentoPanel.setLayout(modificarDepartamentoPanelLayout);
         modificarDepartamentoPanelLayout.setHorizontalGroup(
             modificarDepartamentoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(modificarDepartamentoPanelLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
                 .addGroup(modificarDepartamentoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modificarDepartamentoPanelLayout.createSequentialGroup()
-                        .addComponent(ubicacionLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(ubicacionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(modificarDepartamentoPanelLayout.createSequentialGroup()
+                        .addGap(37, 37, 37)
                         .addGroup(modificarDepartamentoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modificarDepartamentoPanelLayout.createSequentialGroup()
+                                .addComponent(ubicacionLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(ubicacionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(modificarDepartamentoPanelLayout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(nombreLabel))
-                            .addGroup(modificarDepartamentoPanelLayout.createSequentialGroup()
-                                .addGap(47, 47, 47)
-                                .addComponent(idLabel)))
-                        .addGap(18, 18, 18)
-                        .addGroup(modificarDepartamentoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(idSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(61, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modificarDepartamentoPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(actualizarButton)
-                .addGap(114, 114, 114))
+                                .addGroup(modificarDepartamentoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(modificarDepartamentoPanelLayout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addComponent(nombreLabel))
+                                    .addGroup(modificarDepartamentoPanelLayout.createSequentialGroup()
+                                        .addGap(47, 47, 47)
+                                        .addComponent(idLabel)))
+                                .addGap(18, 18, 18)
+                                .addGroup(modificarDepartamentoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(idSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(modificarDepartamentoPanelLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(actualizarButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(crearButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(borrarButton)))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         modificarDepartamentoPanelLayout.setVerticalGroup(
             modificarDepartamentoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,9 +162,12 @@ public class AdministrativosGUI extends javax.swing.JFrame {
                 .addGroup(modificarDepartamentoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ubicacionLabel)
                     .addComponent(ubicacionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(actualizarButton)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(modificarDepartamentoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(actualizarButton)
+                    .addComponent(crearButton)
+                    .addComponent(borrarButton))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -217,11 +237,30 @@ public class AdministrativosGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void departamentoComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departamentoComboBoxActionPerformed
-                if(!((String)departamentoComboBox.getSelectedItem()).equals("...")){
-                    departamento=controlador.obtenerDepartamento(Integer.parseInt((String)departamentoComboBox.getSelectedItem()));
-                    cargarDatosDepartamento();
-                }
+        if(((String)departamentoComboBox.getSelectedItem()).equals("Crear")){
+            actualizarButton.setVisible(false);
+            borrarButton.setVisible(false);
+            crearButton.setVisible(true);
+            modificarDepartamentoPanel.setVisible(true);
+            idSpinner.setValue(0);
+        nombreTextField.setText("");
+        ubicacionTextField.setText("");
+
+        }else if(!((String)departamentoComboBox.getSelectedItem()).equals("...")){
+            crearButton.setVisible(false);
+            actualizarButton.setVisible(true);
+            borrarButton.setVisible(true);            
+            departamento=controlador.obtenerDepartamento(Integer.parseInt((String)departamentoComboBox.getSelectedItem()));
+            cargarDatosDepartamento();
+        }else{
+            modificarDepartamentoPanel.setVisible(false);
+        }
     }//GEN-LAST:event_departamentoComboBoxActionPerformed
+
+    private void actualizarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarButtonActionPerformed
+        actualizarDatosDepartamentos();
+        controlador.actualizarDepartamento(departamento,id);
+    }//GEN-LAST:event_actualizarButtonActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
@@ -260,6 +299,8 @@ public class AdministrativosGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton actualizarButton;
+    private javax.swing.JButton borrarButton;
+    private javax.swing.JButton crearButton;
     private javax.swing.JComboBox<String> departamentoComboBox;
     private javax.swing.JTabbedPane empresasTabbedPane;
     private javax.swing.JLabel idLabel;
@@ -286,13 +327,20 @@ public class AdministrativosGUI extends javax.swing.JFrame {
             for (Integer departamento : listaDepartamentos) {
                 departamentoComboBox.addItem(Integer.toString(departamento));
             }
+        departamentoComboBox.addItem("Crear");
+
     }
     public void cargarDatosDepartamento(){
         idSpinner.setValue(departamento.getId());
         nombreTextField.setText(departamento.getNombre());
         ubicacionTextField.setText(departamento.getUbicacion());
         modificarDepartamentoPanel.setVisible(true);
-        
+    }
+    public void actualizarDatosDepartamentos(){
+        id = departamento.getId();
+        departamento.setId(Integer.parseInt(idSpinner.getValue().toString()));
+        departamento.setNombre(nombreTextField.getText());
+        departamento.setUbicacion(ubicacionTextField.getText());
         
     }
 }

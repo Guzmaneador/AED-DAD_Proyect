@@ -21,7 +21,7 @@ public class DepartamentoDAOJDBCImpl implements DepartamentoDAO{
     ResultSet resultado ;
     
     private final String SQL_INSERT = "INSERT INTO departamentos (id,nombre,ubicacion) VALUES (?,?,?)";
-    private final String SQL_UPDATE = "UPDATE departamentos SET nombre=? ubicacion=? WHERE id=?";
+    private final String SQL_UPDATE = "UPDATE departamentos SET id=? nombre=? ubicacion=? WHERE id=?";
     private final String SQL_DELETE = "DELETE FROM departamentos WHERE id=?";
     private final String SQL_SELECT_ALL= "SELECT * FROM departamentos";
     private final String SQL_SELECT_ID= "SELECT id FROM departamentos";
@@ -53,8 +53,20 @@ public class DepartamentoDAOJDBCImpl implements DepartamentoDAO{
     }
 
     @Override
-    public String actualizar(DepartamentoVO departamento) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String actualizar(DepartamentoVO departamento,int id) {
+        try {
+            conexion = pool.getConnection();
+            PreparedStatement miPreStatment= conexion.prepareCall(SQL_UPDATE);
+            miPreStatment.setString(1, Integer.toString(departamento.getId()));
+            miPreStatment.setString(2, departamento.getNombre());
+            miPreStatment.setString(3, departamento.getUbicacion());
+            miPreStatment.setString(4, Integer.toString(id));
+            System.out.println(miPreStatment);
+            miPreStatment.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DepartamentoDAOJDBCImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "Actualizado correctamente";
     }
 
     @Override

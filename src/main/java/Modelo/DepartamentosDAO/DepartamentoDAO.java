@@ -10,7 +10,7 @@ public interface DepartamentoDAO {
     
     public String insertar(DepartamentoVO departamento);
     public String borrar(int id);
-    public String actualizar (DepartamentoVO departamento);
+    public String actualizar (DepartamentoVO departamento,int id);
     public ArrayList<Integer> listaDepartamentos();
     public DepartamentoVO dameDepartamentoId(int id);
     
