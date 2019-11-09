@@ -1,8 +1,10 @@
 package Controlador;
 
+import Modelo.DepartamentosDAO.DepartamentoVO;
 import Modelo.EmpleadosDAO.EmpleadoDAOJDBImpl;
 import Modelo.EmpleadosDAO.EmpleadoVO;
 import Modelo.Modelo;
+import Vista.Login.Administrativos.AdministrativosGUI;
 import Vista.Login.Empleado.EmpleadosGUI;
 import Vista.Vista;
 import java.sql.SQLException;
@@ -52,7 +54,9 @@ public class ControladorImpl implements Controlador {
                 
                 break;
             case "Administrativo":
-//                administrativoRadioButton.setSelected(true);
+             AdministrativosGUI AdminGui = new AdministrativosGUI(obtenerDepartamentos(),empleado);
+                AdminGui.setVisible(true);
+                AdminGui.setLocationRelativeTo(null);
                 break;
             default:
                 throw new AssertionError();
@@ -70,6 +74,9 @@ public class ControladorImpl implements Controlador {
     
     public ArrayList<Integer> obtenerDepartamentos(){
        return modelo.dameDepartamentos();
+    }
+    public DepartamentoVO obtenerDepartamento(int id){
+       return modelo.dameDepartamento(id);
     }
     
     

@@ -1,5 +1,6 @@
 package Modelo;
 
+import Modelo.DepartamentosDAO.DepartamentoVO;
 import Modelo.EmpleadosDAO.EmpleadoVO;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -15,4 +16,5 @@ public interface Modelo {
     public void actualizarEmpleado(EmpleadoVO empleado) throws SQLException;
     public void actualizarEmpleado(EmpleadoVO empleado,String password) throws SQLException;
     public ArrayList<Integer> dameDepartamentos();
+    public DepartamentoVO dameDepartamento(int id);
 }

@@ -25,6 +25,7 @@ public class DepartamentoDAOJDBCImpl implements DepartamentoDAO{
     private final String SQL_DELETE = "DELETE FROM departamentos WHERE id=?";
     private final String SQL_SELECT_ALL= "SELECT * FROM departamentos";
     private final String SQL_SELECT_ID= "SELECT id FROM departamentos";
+    private final String SQL_SELECT_DEPARTAMENTOS= "SELECT * FROM departamentos WHERE id=?";
     private Connection miConexion;
     private PreparedStatement miPreparedStatement;
     private ResultSet miResultSet;
@@ -75,7 +76,24 @@ public class DepartamentoDAOJDBCImpl implements DepartamentoDAO{
 
     @Override
     public DepartamentoVO dameDepartamentoId(int id) {
+        try {
+            DepartamentoVO departamento;
+            conexion = pool.getConnection();
+            PreparedStatement miPreStatment= conexion.prepareCall(SQL_SELECT_DEPARTAMENTOS);
+            miPreStatment.setString(1, Integer.toString(id));
+            resultado=miPreStatment.executeQuery();
+            if(resultado.next()){
+            departamento= new DepartamentoVO(resultado.getInt("id"),resultado.getString("nombre"),resultado.getString("ubicacion"));     
+            return departamento;
+            }else throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DepartamentoDAOJDBCImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
     
     

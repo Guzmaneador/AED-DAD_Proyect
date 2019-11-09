@@ -57,6 +57,9 @@ public class ModeloImpl implements Modelo{
     public ArrayList<Integer> dameDepartamentos(){
         return departamentosDao.listaDepartamentos();
     }
+    public DepartamentoVO dameDepartamento(int id){
+        return departamentosDao.dameDepartamentoId(id);
+    }
     
 
 }
