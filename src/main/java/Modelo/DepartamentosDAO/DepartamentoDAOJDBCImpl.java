@@ -82,7 +82,22 @@ public class DepartamentoDAOJDBCImpl implements DepartamentoDAO{
         } catch (SQLException ex) {
             Logger.getLogger(DepartamentoDAOJDBCImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return listaDepartamentos;
+        return listaDepartamentos; 
+    }
+    @Override
+    public ArrayList<DepartamentoVO> listaDepartamentosVO() {
+        ArrayList<DepartamentoVO> listaDepartamentoVO = new ArrayList<>();
+        try {
+            conexion = pool.getConnection();
+            Statement miStatement = conexion.createStatement();
+            resultado= miStatement.executeQuery(SQL_SELECT_ALL);
+            while (resultado.next()){
+                listaDepartamentoVO.add(new DepartamentoVO(resultado.getInt("id"),resultado.getString("nombre"),resultado.getString("ubicacion")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DepartamentoDAOJDBCImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listaDepartamentoVO;
         
     }
 

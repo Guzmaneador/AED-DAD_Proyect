@@ -85,6 +85,10 @@ public class ControladorImpl implements Controlador {
         modelo.actualizarDepartamento(departamento,id);
         
     }
+    @Override
+    public ArrayList<DepartamentoVO> listaDepartamentosVOControlador(){
+        return modelo.listaDepartamentosVOModelo();
+    } 
     
     
     

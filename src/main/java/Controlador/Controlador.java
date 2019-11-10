@@ -3,6 +3,7 @@ package Controlador;
 import Modelo.DepartamentosDAO.DepartamentoVO;
 import Modelo.EmpleadosDAO.EmpleadoVO;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,4 +16,6 @@ public interface Controlador {
     public void login() throws SQLException;
     public DepartamentoVO obtenerDepartamento(int id);
     public void actualizarDepartamento(DepartamentoVO departamento,int id);
+    public ArrayList<DepartamentoVO> listaDepartamentosVOControlador();
+    
 }

@@ -13,6 +13,7 @@ public interface DepartamentoDAO {
     public String actualizar (DepartamentoVO departamento,int id);
     public ArrayList<Integer> listaDepartamentos();
     public DepartamentoVO dameDepartamentoId(int id);
+    public ArrayList<DepartamentoVO> listaDepartamentosVO();
     
     
 }

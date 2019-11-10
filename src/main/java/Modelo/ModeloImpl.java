@@ -63,6 +63,10 @@ public class ModeloImpl implements Modelo{
     public void actualizarDepartamento(DepartamentoVO departamento,int id){
         departamentosDao.actualizar(departamento,id);
     }
+    @Override
+    public ArrayList<DepartamentoVO> listaDepartamentosVOModelo(){
+        return departamentosDao.listaDepartamentosVO();
+    }
     
 
 }

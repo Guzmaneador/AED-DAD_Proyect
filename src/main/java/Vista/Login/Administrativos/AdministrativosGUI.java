@@ -8,6 +8,7 @@ import Modelo.EmpleadosDAO.EmpleadoVO;
 import Modelo.ModeloImpl;
 import Vista.VistaImpl;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -24,7 +25,9 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         initComponents();
         modificarDepartamentoPanel.setVisible(false);
         cargarDepartamentos(listaDepartamento);
+        crearDepartamentosTabla();
         this.empleado=empleado;
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -52,7 +55,7 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         crearButton = new javax.swing.JButton();
         borrarButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        depatamentosTable = new javax.swing.JTable();
 
         jMenu1.setText("jMenu1");
 
@@ -84,7 +87,7 @@ public class AdministrativosGUI extends javax.swing.JFrame {
             .addGap(0, 368, Short.MAX_VALUE)
         );
 
-        empresasTabbedPane.addTab("tab1", jPanel1);
+        empresasTabbedPane.addTab("Empleados", jPanel1);
 
         jLabel1.setText("Selecione el departamento:");
 
@@ -139,11 +142,11 @@ public class AdministrativosGUI extends javax.swing.JFrame {
                                     .addComponent(idSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(modificarDepartamentoPanelLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
+                        .addGap(15, 15, 15)
                         .addComponent(actualizarButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(crearButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(borrarButton)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
@@ -170,18 +173,15 @@ public class AdministrativosGUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        depatamentosTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(depatamentosTable);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -302,6 +302,7 @@ public class AdministrativosGUI extends javax.swing.JFrame {
     private javax.swing.JButton borrarButton;
     private javax.swing.JButton crearButton;
     private javax.swing.JComboBox<String> departamentoComboBox;
+    private javax.swing.JTable depatamentosTable;
     private javax.swing.JTabbedPane empresasTabbedPane;
     private javax.swing.JLabel idLabel;
     private javax.swing.JSpinner idSpinner;
@@ -314,7 +315,6 @@ public class AdministrativosGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JPanel modificarDepartamentoPanel;
     private javax.swing.JLabel nombreLabel;
     private javax.swing.JTextField nombreTextField;
@@ -341,6 +341,21 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         departamento.setId(Integer.parseInt(idSpinner.getValue().toString()));
         departamento.setNombre(nombreTextField.getText());
         departamento.setUbicacion(ubicacionTextField.getText());
+        
+    }
+    public void crearDepartamentosTabla(){
+        ArrayList<DepartamentoVO> listaDepartamentoVO;
+        listaDepartamentoVO= controlador.listaDepartamentosVOControlador();
+        DefaultTableModel modelo = (DefaultTableModel)depatamentosTable.getModel();
+        modelo.addColumn("Id");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Ubicacion");
+            for (DepartamentoVO departamentoVO : listaDepartamentoVO) {
+                Object[] datos ={departamentoVO.getId(),departamentoVO.getNombre(),departamentoVO.getUbicacion()};
+                modelo.addRow(datos);
+            }
+        
+        
         
     }
 }

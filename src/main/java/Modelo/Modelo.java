@@ -18,5 +18,5 @@ public interface Modelo {
     public ArrayList<Integer> dameDepartamentos();
     public DepartamentoVO dameDepartamento(int id);
     public void actualizarDepartamento(DepartamentoVO departamento,int id);
-
+    public ArrayList<DepartamentoVO> listaDepartamentosVOModelo();
 }
