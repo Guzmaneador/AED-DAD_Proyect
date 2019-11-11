@@ -92,6 +92,12 @@ public class ControladorImpl implements Controlador {
     public ArrayList<DepartamentoVO> listaDepartamentosVOControlador(){
         return modelo.listaDepartamentosVOModelo();
     } 
+    @Override
+    public ArrayList<EmpleadoVO> listaEmpleadosControlador(){
+                return modelo.listaEmpleadoVOModelo();
+
+        
+    }
     
     
     

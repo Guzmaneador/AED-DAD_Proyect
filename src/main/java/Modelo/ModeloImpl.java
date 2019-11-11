@@ -68,5 +68,10 @@ public class ModeloImpl implements Modelo{
         return departamentosDao.listaDepartamentosVO();
     }
     
+    public ArrayList<EmpleadoVO> listaEmpleadoVOModelo(){
+                return empleadoDao.listaEmpleadosVO();
+   
+    }
+    
 
 }

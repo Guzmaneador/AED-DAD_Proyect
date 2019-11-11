@@ -17,5 +17,5 @@ public interface Controlador {
     public DepartamentoVO obtenerDepartamento(int id);
     public void actualizarDepartamento(DepartamentoVO departamento,int id);
     public ArrayList<DepartamentoVO> listaDepartamentosVOControlador();
-    
+    public ArrayList<EmpleadoVO> listaEmpleadosControlador();
 }

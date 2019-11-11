@@ -19,4 +19,5 @@ public interface Modelo {
     public DepartamentoVO dameDepartamento(int id);
     public void actualizarDepartamento(DepartamentoVO departamento,int id);
     public ArrayList<DepartamentoVO> listaDepartamentosVOModelo();
+    public ArrayList<EmpleadoVO> listaEmpleadoVOModelo();
 }

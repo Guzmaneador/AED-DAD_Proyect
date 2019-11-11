@@ -1,10 +1,15 @@
 package Modelo.EmpleadosDAO;
 
+import Modelo.DepartamentosDAO.DepartamentoDAOJDBCImpl;
 import Modelo.PoolConexiones;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sql.DataSource;
 
 
@@ -18,6 +23,7 @@ public class EmpleadoDAOJDBImpl implements EmpleadoDAO{
     Connection conexion ;
     DataSource pool = new PoolConexiones().getPoolConexion();
     ResultSet resultado ;
+    private final String SQL_SELECT_ALL= "SELECT * FROM empleados";
     private final String SQL_SELECT_EMPLEADO= "SELECT * FROM empleados WHERE nombre=?";
     private final String SQL_UPDATE_PASSWORD="UPDATE login SET password=AES_ENCRYPT('NoLoVesJeJe', ?) WHERE nif=?";
     private final String SQL_UPDATE = "UPDATE empleados SET nif=?, nombre=?, tipo=?, oficio=?, fecha_alta=?, salario=?, id=? WHERE nombre=?";
@@ -79,6 +85,23 @@ public class EmpleadoDAOJDBImpl implements EmpleadoDAO{
        }else{
             throw new UnsupportedOperationException("Error al hacer la caonsulta optenerEmpleado"); //To change body of generated methods, choose Tools | Templates.
        }
+    }
+    
+
+    @Override
+    public ArrayList<EmpleadoVO> listaEmpleadosVO() {
+        ArrayList<EmpleadoVO> listaEmpleados = new ArrayList<>();
+        try {
+            conexion = pool.getConnection();
+            Statement miStatement = conexion.createStatement();
+            resultado= miStatement.executeQuery(SQL_SELECT_ALL);
+            while (resultado.next()){
+                listaEmpleados.add(new EmpleadoVO(resultado.getString("nif"),resultado.getString("nombre"),resultado.getString("tipo"),resultado.getString("oficio"),resultado.getDate("fecha_alta"),resultado.getDouble("salario"),resultado.getInt("id")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DepartamentoDAOJDBCImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listaEmpleados; 
     }
   
 
