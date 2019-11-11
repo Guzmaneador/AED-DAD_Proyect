@@ -6,6 +6,7 @@ import Modelo.EmpleadosDAO.EmpleadoVO;
 import Modelo.Modelo;
 import Vista.Login.Administrativos.AdministrativosGUI;
 import Vista.Login.Empleado.EmpleadosGUI;
+import Vista.Login.LoginGUI;
 import Vista.Vista;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -30,19 +31,21 @@ public class ControladorImpl implements Controlador {
     public void iniciar(){
         try {
             modelo.start(vista.getComandosSQLInicio());
-            login();
+              LoginGUI logGui = new LoginGUI();
+              logGui.setVisible(true);
+              logGui.setLocationRelativeTo(null);
             
         } catch (SQLException ex) {
             Logger.getLogger(ControladorImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     @Override
-    public void login() throws SQLException{
-        empleado=modelo.login(vista.solicitarLogin());
+    public void login(ArrayList<String> passUser) throws SQLException{
+        empleado=modelo.login(passUser);
         if(empleado.isLogeado()){
           analizarTipo();  
         }else{
-            login();
+//            login();
         }
     }
     private void analizarTipo() throws SQLException{

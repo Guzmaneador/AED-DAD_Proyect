@@ -7,6 +7,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.sql.DataSource;
 
 /**
  *
@@ -21,11 +22,12 @@ public class Login {
     String SQL_COMPARE_PASSWORD="SELECT AES_DECRYPT(password, ?) FROM login WHERE nif=?";
     ResultSet resultado ;
     Connection conexion;
+    DataSource pool = new PoolConexiones().getPoolConexion();
 
     public Login(ArrayList<String> userPass,Connection conexion) throws SQLException {
         this.usuario = userPass.get(0);
         this.contraseña = userPass.get(1);
-        this.conexion=conexion;
+        this.conexion=pool.getConnection();
 //        analizarDatos();Antonio
         /*
         Modelo devuelve un objeto EmpleadosVO de tipo empleado el cual trata la interfa
