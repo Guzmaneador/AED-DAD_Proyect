@@ -6,8 +6,13 @@ import Controlador.ControladorImpl;
 import Modelo.DepartamentosDAO.DepartamentoVO;
 import Modelo.EmpleadosDAO.EmpleadoVO;
 import Modelo.ModeloImpl;
+import Vista.Login.Empleado.EmpleadosGUI;
 import Vista.VistaImpl;
+import static java.lang.Thread.sleep;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,6 +24,7 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         Controlador controlador = new ControladorImpl(new ModeloImpl(),new VistaImpl());
         DepartamentoVO empresa;
         EmpleadoVO empleado;
+        EmpleadoVO empleadoTratado;
         DepartamentoVO departamento;
         ArrayList<EmpleadoVO> listaEmpleados;
         int id ;
@@ -27,6 +33,8 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         initComponents();
         modificarDepartamentoPanel.setVisible(false);
         modificarEmpleadoPanel.setVisible(false);
+        passwordPanel.setVisible(false);
+        nCoicidenLabel.setVisible(false);
         cargarDepartamentos(listaDepartamento);
         crearDepartamentosTabla();
         this.empleado=empleado;
@@ -46,6 +54,7 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         empresasTabbedPane = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         modificarEmpleadoPanel = new javax.swing.JPanel();
@@ -63,14 +72,20 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         altaLabel = new javax.swing.JLabel();
         salarioLabel = new javax.swing.JLabel();
         idLabel1 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
-        jLabel4 = new javax.swing.JLabel();
+        porcentajeSpinner = new javax.swing.JSpinner();
+        resultSaldoLabel = new javax.swing.JLabel();
         salarioField = new javax.swing.JLabel();
         crearEmpleadoButton = new javax.swing.JButton();
         borrarEmpleadoButton = new javax.swing.JButton();
         actualizarEmpleadoButton = new javax.swing.JButton();
+        calcularButtom = new javax.swing.JButton();
+        passwordCheckBox = new javax.swing.JCheckBox();
+        passwordPanel = new javax.swing.JPanel();
+        passwordField1 = new javax.swing.JPasswordField();
+        passwordField2 = new javax.swing.JPasswordField();
+        nCoicidenLabel = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        empleadosTable = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         dniComboBox = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
@@ -83,9 +98,9 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         nombreTextField = new javax.swing.JTextField();
         ubicacionTextField = new javax.swing.JTextField();
         idSpinner = new javax.swing.JSpinner();
-        actualizarButton = new javax.swing.JButton();
-        crearButton = new javax.swing.JButton();
-        borrarButton = new javax.swing.JButton();
+        actualizarDepartamentoButton = new javax.swing.JButton();
+        crearDepartamentoButton = new javax.swing.JButton();
+        borrarDepartamentoButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         depatamentosTable = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
@@ -120,13 +135,21 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         jMenu4.setText("jMenu4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         modificarEmpleadoPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         fechaAltaTextField.setText("aaaa-mm-dd");
+        fechaAltaTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fechaAltaTextFieldActionPerformed(evt);
+            }
+        });
 
+        buttonGroup1.add(administrativoRadioButton);
         administrativoRadioButton.setText("Administrativo");
 
+        buttonGroup1.add(empleadoRadioButton);
         empleadoRadioButton.setText("Empleado");
 
         oficioTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -161,7 +184,18 @@ public class AdministrativosGUI extends javax.swing.JFrame {
 
         idLabel1.setText("ID: ");
 
-        jLabel4.setText("jLabel4");
+        porcentajeSpinner.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                porcentajeSpinnerFocusLost(evt);
+            }
+        });
+        porcentajeSpinner.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                porcentajeSpinnerMouseClicked(evt);
+            }
+        });
+
+        resultSaldoLabel.setText("%");
 
         crearEmpleadoButton.setIcon(new ImageIcon("src/main/java/Vista/Png/addUser-x1.png"));
         crearEmpleadoButton.setText("Crear");
@@ -179,88 +213,150 @@ public class AdministrativosGUI extends javax.swing.JFrame {
             }
         });
 
+        calcularButtom.setText("Calcular");
+        calcularButtom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calcularButtomActionPerformed(evt);
+            }
+        });
+
+        passwordCheckBox.setText("Cambiar Contraseña");
+        passwordCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordCheckBoxActionPerformed(evt);
+            }
+        });
+
+        passwordPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        nCoicidenLabel.setText("*No coiciden ");
+
+        javax.swing.GroupLayout passwordPanelLayout = new javax.swing.GroupLayout(passwordPanel);
+        passwordPanel.setLayout(passwordPanelLayout);
+        passwordPanelLayout.setHorizontalGroup(
+            passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(passwordPanelLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(passwordField2, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                    .addComponent(passwordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                    .addComponent(nCoicidenLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
+        );
+        passwordPanelLayout.setVerticalGroup(
+            passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(passwordPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(nCoicidenLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(passwordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(passwordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout modificarEmpleadoPanelLayout = new javax.swing.GroupLayout(modificarEmpleadoPanel);
         modificarEmpleadoPanel.setLayout(modificarEmpleadoPanelLayout);
         modificarEmpleadoPanelLayout.setHorizontalGroup(
             modificarEmpleadoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(modificarEmpleadoPanelLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
                 .addGroup(modificarEmpleadoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(actualizarEmpleadoButton)
                     .addGroup(modificarEmpleadoPanelLayout.createSequentialGroup()
-                        .addGroup(modificarEmpleadoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(altaLabel)
-                            .addComponent(nifLabel)
-                            .addComponent(nombreLabel1)
-                            .addComponent(oficioLabel)
-                            .addComponent(tipoLabel)
-                            .addComponent(salarioLabel)
-                            .addGroup(modificarEmpleadoPanelLayout.createSequentialGroup()
-                                .addComponent(idLabel1)
-                                .addGap(10, 10, 10)))
-                        .addGap(108, 108, 108)
+                        .addGap(27, 27, 27)
                         .addGroup(modificarEmpleadoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(oficioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(modificarEmpleadoPanelLayout.createSequentialGroup()
-                                .addComponent(empleadoRadioButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(administrativoRadioButton))
-                            .addGroup(modificarEmpleadoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(fechaAltaTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                                .addComponent(idTextField, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addComponent(nombreEmpleadoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nifTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(modificarEmpleadoPanelLayout.createSequentialGroup()
+                                .addGroup(modificarEmpleadoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(altaLabel)
+                                    .addComponent(oficioLabel)
+                                    .addComponent(tipoLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(modificarEmpleadoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(oficioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(modificarEmpleadoPanelLayout.createSequentialGroup()
-                                        .addComponent(salarioField, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(empleadoRadioButton)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(modificarEmpleadoPanelLayout.createSequentialGroup()
-                                        .addGap(1, 1, 1)
-                                        .addComponent(crearEmpleadoButton)))
-                                .addGap(18, 18, 18)
+                                        .addComponent(administrativoRadioButton))
+                                    .addComponent(fechaAltaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(actualizarEmpleadoButton)
+                            .addGroup(modificarEmpleadoPanelLayout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addGroup(modificarEmpleadoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(nifLabel)
+                                    .addComponent(nombreLabel1))
                                 .addGroup(modificarEmpleadoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(borrarEmpleadoButton)
-                                    .addComponent(jLabel4))))))
-                .addContainerGap(106, Short.MAX_VALUE))
+                                    .addGroup(modificarEmpleadoPanelLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(modificarEmpleadoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(nombreEmpleadoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(nifTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(modificarEmpleadoPanelLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
+                                        .addComponent(crearEmpleadoButton)
+                                        .addGap(138, 138, 138)
+                                        .addComponent(borrarEmpleadoButton))))))
+                    .addGroup(modificarEmpleadoPanelLayout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(salarioLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(salarioField, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(porcentajeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(resultSaldoLabel)
+                        .addGap(84, 84, 84)
+                        .addComponent(calcularButtom))
+                    .addGroup(modificarEmpleadoPanelLayout.createSequentialGroup()
+                        .addGap(81, 81, 81)
+                        .addComponent(idLabel1)
+                        .addGap(22, 22, 22)
+                        .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(modificarEmpleadoPanelLayout.createSequentialGroup()
+                        .addGap(162, 162, 162)
+                        .addGroup(modificarEmpleadoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(passwordCheckBox)
+                            .addComponent(passwordPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(38, 38, 38))
         );
         modificarEmpleadoPanelLayout.setVerticalGroup(
             modificarEmpleadoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modificarEmpleadoPanelLayout.createSequentialGroup()
-                .addContainerGap(10, Short.MAX_VALUE)
-                .addGroup(modificarEmpleadoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(nombreLabel1)
-                    .addComponent(nombreEmpleadoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addGroup(modificarEmpleadoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nombreEmpleadoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nombreLabel1))
                 .addGap(10, 10, 10)
-                .addGroup(modificarEmpleadoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(modificarEmpleadoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nifTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nifLabel))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(modificarEmpleadoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modificarEmpleadoPanelLayout.createSequentialGroup()
-                        .addGroup(modificarEmpleadoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(oficioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(oficioLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(modificarEmpleadoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(empleadoRadioButton)
-                            .addComponent(administrativoRadioButton)
-                            .addComponent(tipoLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fechaAltaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(altaLabel, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addGroup(modificarEmpleadoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(salarioField)
-                    .addComponent(salarioLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(modificarEmpleadoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(idLabel1))
+                    .addComponent(oficioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(oficioLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(modificarEmpleadoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(empleadoRadioButton)
+                    .addComponent(administrativoRadioButton)
+                    .addComponent(tipoLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(modificarEmpleadoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fechaAltaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(altaLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(modificarEmpleadoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(porcentajeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(resultSaldoLabel)
+                    .addComponent(salarioField)
+                    .addComponent(salarioLabel)
+                    .addComponent(calcularButtom))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(modificarEmpleadoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(idLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(idTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(passwordCheckBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(passwordPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(modificarEmpleadoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(actualizarEmpleadoButton)
                     .addComponent(crearEmpleadoButton)
@@ -268,18 +364,15 @@ public class AdministrativosGUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        empleadosTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        jScrollPane3.setViewportView(jTable2);
+        jScrollPane3.setViewportView(empleadosTable);
 
         jLabel5.setText("Selecione un DNI:");
 
@@ -298,8 +391,8 @@ public class AdministrativosGUI extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(44, 44, 44)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(modificarEmpleadoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(modificarEmpleadoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(74, 74, 74)
                         .addComponent(jLabel5)
@@ -314,9 +407,9 @@ public class AdministrativosGUI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(dniComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(modificarEmpleadoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -339,16 +432,19 @@ public class AdministrativosGUI extends javax.swing.JFrame {
 
         ubicacionLabel.setText("Ubicacion:");
 
-        actualizarButton.setText("Actualizar");
-        actualizarButton.addActionListener(new java.awt.event.ActionListener() {
+        actualizarDepartamentoButton.setIcon(new ImageIcon("src/main/java/Vista/Png/update-x1.png"));
+        actualizarDepartamentoButton.setText("Actualizar");
+        actualizarDepartamentoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                actualizarButtonActionPerformed(evt);
+                actualizarDepartamentoButtonActionPerformed(evt);
             }
         });
 
-        crearButton.setText("Crear");
+        crearDepartamentoButton.setIcon(new ImageIcon("src/main/java/Vista/Png/addUser-x1.png"));
+        crearDepartamentoButton.setText("Crear");
 
-        borrarButton.setText("Borrar");
+        borrarDepartamentoButton.setIcon(new ImageIcon("src/main/java/Vista/Png/delete-x1.png"));
+        borrarDepartamentoButton.setText("Borrar");
 
         javax.swing.GroupLayout modificarDepartamentoPanelLayout = new javax.swing.GroupLayout(modificarDepartamentoPanel);
         modificarDepartamentoPanel.setLayout(modificarDepartamentoPanelLayout);
@@ -377,11 +473,11 @@ public class AdministrativosGUI extends javax.swing.JFrame {
                                     .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(modificarDepartamentoPanelLayout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(actualizarButton)
+                        .addComponent(actualizarDepartamentoButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(crearButton)
+                        .addComponent(crearDepartamentoButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(borrarButton)))
+                        .addComponent(borrarDepartamentoButton)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         modificarDepartamentoPanelLayout.setVerticalGroup(
@@ -401,9 +497,9 @@ public class AdministrativosGUI extends javax.swing.JFrame {
                     .addComponent(ubicacionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(modificarDepartamentoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(actualizarButton)
-                    .addComponent(crearButton)
-                    .addComponent(borrarButton))
+                    .addComponent(actualizarDepartamentoButton)
+                    .addComponent(crearDepartamentoButton)
+                    .addComponent(borrarDepartamentoButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -448,7 +544,7 @@ public class AdministrativosGUI extends javax.swing.JFrame {
                 .addComponent(modificarDepartamentoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addContainerGap(241, Short.MAX_VALUE))
         );
 
         empresasTabbedPane.addTab("Departamentos", jPanel2);
@@ -461,7 +557,7 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 456, Short.MAX_VALUE)
+            .addGap(0, 581, Short.MAX_VALUE)
         );
 
         empresasTabbedPane.addTab("Usuario", jPanel3);
@@ -476,6 +572,11 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         jButton1.setSelectedIcon(new ImageIcon("src/main/java/Vista/Png/cancel-x2.png"));
         jButton1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setIcon(new ImageIcon("src/main/java/Vista/Png/logOut-x1.png"));
         jButton2.setBorder(null);
@@ -527,27 +628,22 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(nombreUser, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(dniUser, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(logoUser, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(empresasTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                            .addComponent(logoUser, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(empresasTabbedPane))
         );
 
         pack();
@@ -555,18 +651,18 @@ public class AdministrativosGUI extends javax.swing.JFrame {
 
     private void departamentoComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departamentoComboBoxActionPerformed
         if(((String)departamentoComboBox.getSelectedItem()).equals("Crear")){
-            actualizarButton.setVisible(false);
-            borrarButton.setVisible(false);
-            crearButton.setVisible(true);
+            actualizarDepartamentoButton.setVisible(false);
+            borrarDepartamentoButton.setVisible(false);
+            crearDepartamentoButton.setVisible(true);
             modificarDepartamentoPanel.setVisible(true);
             idSpinner.setValue(0);
         nombreTextField.setText("");
         ubicacionTextField.setText("");
 
         }else if(!((String)departamentoComboBox.getSelectedItem()).equals("...")){
-            crearButton.setVisible(false);
-            actualizarButton.setVisible(true);
-            borrarButton.setVisible(true);            
+            crearDepartamentoButton.setVisible(false);
+            actualizarDepartamentoButton.setVisible(true);
+            borrarDepartamentoButton.setVisible(true);            
             departamento=controlador.obtenerDepartamento(Integer.parseInt((String)departamentoComboBox.getSelectedItem()));
             cargarDatosDepartamento();
         }else{
@@ -574,10 +670,10 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_departamentoComboBoxActionPerformed
 
-    private void actualizarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarButtonActionPerformed
+    private void actualizarDepartamentoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarDepartamentoButtonActionPerformed
         actualizarDatosDepartamentos();
         controlador.actualizarDepartamento(departamento,id);
-    }//GEN-LAST:event_actualizarButtonActionPerformed
+    }//GEN-LAST:event_actualizarDepartamentoButtonActionPerformed
 
     private void oficioTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_oficioTextFieldActionPerformed
         // TODO add your handling code here:
@@ -593,9 +689,9 @@ public class AdministrativosGUI extends javax.swing.JFrame {
 
     private void dniComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dniComboBoxActionPerformed
         if(((String)dniComboBox.getSelectedItem()).equals("Crear")){
-            actualizarButton.setVisible(false);
-            borrarButton.setVisible(false);
-            crearButton.setVisible(true);
+            actualizarEmpleadoButton.setVisible(false);
+            borrarEmpleadoButton.setVisible(false);
+            crearEmpleadoButton.setVisible(true);
             modificarEmpleadoPanel.setVisible(true);
             nombreTextField.setText("");
                     nifTextField.setText("");
@@ -607,9 +703,9 @@ public class AdministrativosGUI extends javax.swing.JFrame {
                     idTextField.setText("");
 
         }else if(!((String)dniComboBox.getSelectedItem()).equals("...")){
-            crearButton.setVisible(false);
-            actualizarButton.setVisible(true);
-            borrarButton.setVisible(true);   
+            crearEmpleadoButton.setVisible(false);
+            actualizarEmpleadoButton.setVisible(true);
+            borrarEmpleadoButton.setVisible(true);   
             modificarEmpleadoPanel.setVisible(true);
             rellenarFormularioEmpleado();
         }else{
@@ -618,12 +714,61 @@ public class AdministrativosGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_dniComboBoxActionPerformed
 
     private void actualizarEmpleadoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarEmpleadoButtonActionPerformed
-        // TODO add your handling code here:
+         try {
+            if(passwordCheckBox.isSelected()){
+                if(compararPassword()){
+                    actualizarDatosEmpleado();
+                    controlador.actualizarEmpleado(empleado,new String (passwordField1.getPassword()));
+                    nCoicidenLabel.setVisible(false);
+                }else{
+                    nCoicidenLabel.setVisible(true);
+                }              
+            }else{
+                actualizarDatosEmpleado();
+                controlador.actualizarEmpleado(empleado);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(EmpleadosGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_actualizarEmpleadoButtonActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void porcentajeSpinnerFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_porcentajeSpinnerFocusLost
+        double porcentaje = empleadoTratado.getSalario()*(Integer.parseInt(porcentajeSpinner.getValue().toString())*100);
+        System.out.println(porcentaje);
+        resultSaldoLabel.setText(String.valueOf(empleadoTratado.getSalario()+porcentaje));
+    }//GEN-LAST:event_porcentajeSpinnerFocusLost
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void fechaAltaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaAltaTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fechaAltaTextFieldActionPerformed
+
+    private void porcentajeSpinnerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_porcentajeSpinnerMouseClicked
+       double porcentaje = empleadoTratado.getSalario()*(Integer.parseInt(porcentajeSpinner.getValue().toString())*100);
+        System.out.println(porcentaje);
+        resultSaldoLabel.setText(String.valueOf(empleadoTratado.getSalario()+porcentaje));
+    }//GEN-LAST:event_porcentajeSpinnerMouseClicked
+
+    private void calcularButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcularButtomActionPerformed
+        double porcentaje = empleadoTratado.getSalario()*(Double.parseDouble(porcentajeSpinner.getValue().toString())/100);
+        System.out.println(porcentaje);
+        resultSaldoLabel.setText(String.valueOf(empleadoTratado.getSalario()+porcentaje));
+    }//GEN-LAST:event_calcularButtomActionPerformed
+
+    private void passwordCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordCheckBoxActionPerformed
+        if(passwordCheckBox.isSelected())
+        passwordPanel.setVisible(true);
+        else
+        passwordPanel.setVisible(false);
+        nCoicidenLabel.setVisible(false);
+    }//GEN-LAST:event_passwordCheckBoxActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
@@ -661,19 +806,22 @@ public class AdministrativosGUI extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton actualizarButton;
+    private javax.swing.JButton actualizarDepartamentoButton;
     private javax.swing.JButton actualizarEmpleadoButton;
     private javax.swing.JRadioButton administrativoRadioButton;
     private javax.swing.JLabel altaLabel;
-    private javax.swing.JButton borrarButton;
+    private javax.swing.JButton borrarDepartamentoButton;
     private javax.swing.JButton borrarEmpleadoButton;
-    private javax.swing.JButton crearButton;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton calcularButtom;
+    private javax.swing.JButton crearDepartamentoButton;
     private javax.swing.JButton crearEmpleadoButton;
     private javax.swing.JComboBox<String> departamentoComboBox;
     private javax.swing.JTable depatamentosTable;
     private javax.swing.JComboBox<String> dniComboBox;
     private javax.swing.JLabel dniUser;
     private javax.swing.JRadioButton empleadoRadioButton;
+    private javax.swing.JTable empleadosTable;
     private javax.swing.JTabbedPane empresasTabbedPane;
     private javax.swing.JTextField fechaAltaTextField;
     private javax.swing.JLabel idLabel;
@@ -684,7 +832,6 @@ public class AdministrativosGUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -697,13 +844,12 @@ public class AdministrativosGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JLabel logoUser;
     private javax.swing.JPanel modificarDepartamentoPanel;
     private javax.swing.JPanel modificarEmpleadoPanel;
+    private javax.swing.JLabel nCoicidenLabel;
     private javax.swing.JLabel nifLabel;
     private javax.swing.JTextField nifTextField;
     private javax.swing.JTextField nombreEmpleadoTextField;
@@ -713,12 +859,29 @@ public class AdministrativosGUI extends javax.swing.JFrame {
     private javax.swing.JLabel nombreUser;
     private javax.swing.JLabel oficioLabel;
     private javax.swing.JTextField oficioTextField;
+    private javax.swing.JCheckBox passwordCheckBox;
+    private javax.swing.JPasswordField passwordField1;
+    private javax.swing.JPasswordField passwordField2;
+    private javax.swing.JPanel passwordPanel;
+    private javax.swing.JSpinner porcentajeSpinner;
+    private javax.swing.JLabel resultSaldoLabel;
     private javax.swing.JLabel salarioField;
     private javax.swing.JLabel salarioLabel;
     private javax.swing.JLabel tipoLabel;
     private javax.swing.JLabel ubicacionLabel;
     private javax.swing.JTextField ubicacionTextField;
     // End of variables declaration//GEN-END:variables
+   public void calcularPorcentaje() throws InterruptedException{
+       int n=1;
+       while(n==1){
+        double porcentaje = empleadoTratado.getSalario()*(Integer.parseInt(porcentajeSpinner.getValue().toString())*100);
+        System.out.println(porcentaje);
+        resultSaldoLabel.setText(String.valueOf(empleadoTratado.getSalario()+porcentaje));
+        sleep(1000);
+       }
+       //((String)departamentoComboBox.getSelectedItem()).equals("Crear")
+   }
+    
     public void cargarDepartamentos(ArrayList<Integer> listaDepartamento){
         departamentoComboBox.addItem("...");
         ArrayList<Integer> listaDepartamentos = listaDepartamento;
@@ -758,6 +921,7 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         nombreUser.setText(empleado.getNombre());
         getListaEmpleados();
         cargarEmpleadosDni();
+        crearEmpleadoTabla();
     }
     
     public void getListaEmpleados(){
@@ -770,9 +934,23 @@ public class AdministrativosGUI extends javax.swing.JFrame {
             }
         dniComboBox.addItem("Crear");
     }
+    public void crearEmpleadoTabla(){
+        DefaultTableModel modelo = (DefaultTableModel)empleadosTable.getModel();
+        modelo.addColumn("mif");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("tipo");
+        modelo.addColumn("oficio");
+        modelo.addColumn("salario");
+        modelo.addColumn("id");
+            for (EmpleadoVO empleado : listaEmpleados) {
+                Object[] datos ={empleado.getNif(),empleado.getNombre(),empleado.getTipo(),empleado.getOficio(),empleado.getSalario(),empleado.getId()};
+                modelo.addRow(datos);
+            }      
+    }
     private void rellenarFormularioEmpleado() {
             for (EmpleadoVO empleado : listaEmpleados) {
                 if(empleado.getNif().equals(dniComboBox.getSelectedItem())){
+                    empleadoTratado=empleado;
                     nombreEmpleadoTextField.setText(empleado.getNombre());
                     nifTextField.setText(empleado.getNif());
                     oficioTextField.setText(empleado.getOficio());
@@ -793,6 +971,24 @@ public class AdministrativosGUI extends javax.swing.JFrame {
                 }
                 
             }
+        
+    }
+    private boolean compararPassword(){
+        boolean coinciden = false;
+        if(new String(passwordField1.getPassword()).equals(new String (passwordField2.getPassword())))
+            coinciden=true;       
+        return coinciden;           
+    }
+    private void actualizarDatosEmpleado(){
+        empleadoTratado.setNif(nifTextField.getText());
+        empleadoTratado.setNombre(nombreTextField.getText());
+        empleadoTratado.setOficio(oficioTextField.getText());
+        if(empleadoRadioButton.isSelected())
+            empleadoTratado.setTipo("Empleado");
+        else
+            empleadoTratado.setTipo("Administrativo");
+//        empleadoTratado.setFechaAlta(fechaAlta);
+
         
     }
     

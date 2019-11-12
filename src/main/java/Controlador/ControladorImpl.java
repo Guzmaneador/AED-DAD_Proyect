@@ -21,6 +21,7 @@ public class ControladorImpl implements Controlador {
     EmpleadoVO empleado;
     Modelo modelo;
     Vista vista;
+    LoginGUI logGui;
     
     public ControladorImpl(Modelo modelo, Vista vista) {
         this.modelo = modelo;
@@ -31,7 +32,7 @@ public class ControladorImpl implements Controlador {
     public void iniciar(){
         try {
             modelo.start(vista.getComandosSQLInicio());
-              LoginGUI logGui = new LoginGUI();
+              logGui = new LoginGUI();
               logGui.setVisible(true);
               logGui.setLocationRelativeTo(null);
             
@@ -52,14 +53,18 @@ public class ControladorImpl implements Controlador {
         switch (empleado.getTipo()) {
             case "Empleado":
                 EmpleadosGUI EmplGui = new EmpleadosGUI(empleado);
+//                logGui.dispose();
                 EmplGui.setVisible(true);
                 EmplGui.setLocationRelativeTo(null);
+                
                 
                 break;
             case "Administrativo":
              AdministrativosGUI AdminGui = new AdministrativosGUI(obtenerDepartamentos(),empleado);
                 AdminGui.setVisible(true);
                 AdminGui.setLocationRelativeTo(null);
+//                 logGui.setVisible(false);
+
                 break;
             default:
                 throw new AssertionError();

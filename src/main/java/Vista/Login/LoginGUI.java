@@ -21,7 +21,8 @@ import javax.swing.ImageIcon;
  */
 public class LoginGUI extends javax.swing.JFrame {
     Controlador controlador = new ControladorImpl(new ModeloImpl(),new VistaImpl());
-     ImageIcon iconobtn = new ImageIcon("src/main/java/Vista/Png/close.png");
+             int contador =3;
+
     /**
      * Creates new form NewJFrame
      */
@@ -47,10 +48,12 @@ public class LoginGUI extends javax.swing.JFrame {
         userLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        notificarLabel = new javax.swing.JLabel();
+        notificarLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Panel.setBackground(new java.awt.Color(0, 0, 255));
+        Panel.setBackground(new java.awt.Color(51, 153, 255));
 
         okButtom.setIcon(new ImageIcon("src/main/java/Vista/Png/touch-x1.png"));
         okButtom.setText("Iniciar Sesion");
@@ -92,31 +95,50 @@ public class LoginGUI extends javax.swing.JFrame {
         jButton1.setRolloverIcon(new ImageIcon("src/main/java/Vista/Png/close-x1.png"));
         jButton1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        notificarLabel.setForeground(new java.awt.Color(255, 0, 0));
+
+        notificarLabel2.setForeground(new java.awt.Color(255, 0, 0));
 
         javax.swing.GroupLayout PanelLayout = new javax.swing.GroupLayout(Panel);
         Panel.setLayout(PanelLayout);
         PanelLayout.setHorizontalGroup(
             PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
-                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(PanelLayout.createSequentialGroup()
+            .addGroup(PanelLayout.createSequentialGroup()
+                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(tituloLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(PanelLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelLayout.createSequentialGroup()
+                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanelLayout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(okButtom)
+                                    .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(PanelLayout.createSequentialGroup()
+                                .addGap(58, 58, 58)
+                                .addComponent(userLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(userTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(PanelLayout.createSequentialGroup()
+                                .addGap(75, 75, 75)
+                                .addComponent(notificarLabel))
+                            .addGroup(PanelLayout.createSequentialGroup()
+                                .addGap(75, 75, 75)
+                                .addComponent(notificarLabel2)))
+                        .addGap(0, 86, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(PanelLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(userLabel)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
-                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(okButtom)
-                    .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(userTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(92, Short.MAX_VALUE))
         );
         PanelLayout.setVerticalGroup(
             PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,17 +147,21 @@ public class LoginGUI extends javax.swing.JFrame {
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tituloLabel)
-                .addGap(31, 31, 31)
+                .addGap(12, 12, 12)
+                .addComponent(notificarLabel)
+                .addGap(12, 12, 12)
+                .addComponent(notificarLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(userTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(userLabel))
-                .addGap(45, 45, 45)
+                .addGap(37, 37, 37)
                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addComponent(okButtom)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -157,12 +183,20 @@ public class LoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_userTextFieldActionPerformed
 
     private void okButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtomActionPerformed
+        contador--;
+        notificarLabel.setText("*Usuario o contraseña Incorrectos");
+        notificarLabel2.setText("->Tiene "+String.valueOf(contador)+" intentos.");
+
         try {
             controlador.login(solicitarLogin());
         } catch (SQLException ex) {
             Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_okButtomActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 //    /**
 //     * @param args the command line arguments
@@ -204,6 +238,8 @@ public class LoginGUI extends javax.swing.JFrame {
     private javax.swing.JPanel Panel;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel notificarLabel;
+    private javax.swing.JLabel notificarLabel2;
     private javax.swing.JButton okButtom;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel tituloLabel;
