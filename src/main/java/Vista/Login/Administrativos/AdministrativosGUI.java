@@ -706,6 +706,11 @@ public class AdministrativosGUI extends javax.swing.JFrame {
             borrarEmpleadoButton.setVisible(false);
             crearEmpleadoButton.setVisible(true);
             modificarEmpleadoPanel.setVisible(true);
+            calcularButtom.setVisible(false);
+            resultSaldoLabel.setVisible(false);
+            salarioField.setVisible(false);
+            passwordCheckBox.setVisible(false);
+            passwordPanel.setVisible(true);
             nombreTextField.setText("");
                     nifTextField.setText("");
                     oficioTextField.setText("");

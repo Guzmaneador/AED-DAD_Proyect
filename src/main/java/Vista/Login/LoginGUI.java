@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -184,6 +185,10 @@ public class LoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_userTextFieldActionPerformed
 
     private void okButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtomActionPerformed
+        if(contador==1){
+            JOptionPane.showMessageDialog(null, "Has superado el numero maximo de intentos!!", "Guzmi dice adios :)", JOptionPane.WARNING_MESSAGE);
+            System.exit(0);
+        }
         contador--;
         notificarLabel.setText("*Usuario o contraseña Incorrectos");
         notificarLabel2.setText("->Tiene "+String.valueOf(contador)+" intentos.");
