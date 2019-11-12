@@ -28,7 +28,7 @@ public class EmpleadoDAOJDBImpl implements EmpleadoDAO{
     private final String SQL_UPDATE_PASSWORD="UPDATE login SET password=AES_ENCRYPT('NoLoVesJeJe', ?) WHERE nif=?";
     private final String SQL_UPDATE = "UPDATE empleados SET nif=?, nombre=?, tipo=?, oficio=?, fecha_alta=?, salario=?, id=? WHERE nif=?";
     private final String SQL_DELETE = "DELET FROM empleados WHERE nif=?";
-    private final String SQL_INSERT = "Insert INTO empleados VALUES ('?','?','?','?','?','?','?');";
+    private final String SQL_INSERT = "Insert INTO empleados VALUES (?,?,?,?,?,?,?);";
 
     public EmpleadoDAOJDBImpl() {
     }

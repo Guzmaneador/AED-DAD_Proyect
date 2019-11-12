@@ -107,6 +107,10 @@ public class ControladorImpl implements Controlador {
         modelo.borrarEmpleadoModelo(nif);
     }
     
+    public void crearEmpleadoControlador(EmpleadoVO empleado){
+        modelo.crearEmpleadoModelo(empleado);
+    }
+    
     
    
 

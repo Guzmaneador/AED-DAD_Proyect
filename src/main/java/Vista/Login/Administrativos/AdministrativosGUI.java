@@ -789,7 +789,8 @@ public class AdministrativosGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_borrarEmpleadoButtonActionPerformed
 
     private void crearEmpleadoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearEmpleadoButtonActionPerformed
-        // TODO add your handling code here:
+        actualizarDatosNuevoEmpleado();
+        controlador.crearEmpleadoControlador(empleadoTratado);
     }//GEN-LAST:event_crearEmpleadoButtonActionPerformed
 //
 //    /**
@@ -1016,6 +1017,26 @@ public class AdministrativosGUI extends javax.swing.JFrame {
                 empleadoTratado.setFechaAlta(sqlDate);
                 if(!resultSaldoLabel.getText().equals("%"))
                     empleadoTratado.setSalario(Double.parseDouble(resultSaldoLabel.getText())); 
+                empleadoTratado.setId(Integer.parseInt(idTextField.getText()));
+            } catch (ParseException ex) {
+                Logger.getLogger(AdministrativosGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }
+    private void actualizarDatosNuevoEmpleado() {
+        empleadoTratado = new EmpleadoVO();
+            try {
+                empleadoTratado.setNif(nifTextField.getText());
+                empleadoTratado.setNombre(nombreTextField.getText());
+                empleadoTratado.setOficio(oficioTextField.getText());
+                if(empleadoRadioButton.isSelected())
+                    empleadoTratado.setTipo("Empleado");
+                else
+                    empleadoTratado.setTipo("Administrativo");
+                SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-mm-dd");
+                java.util.Date date = sdf1.parse(fechaAltaTextField.getText());
+                java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+                empleadoTratado.setFechaAlta(sqlDate);
+                empleadoTratado.setSalario(Double.parseDouble(porcentajeSpinner.getValue().toString())); 
                 empleadoTratado.setId(Integer.parseInt(idTextField.getText()));
             } catch (ParseException ex) {
                 Logger.getLogger(AdministrativosGUI.class.getName()).log(Level.SEVERE, null, ex);
