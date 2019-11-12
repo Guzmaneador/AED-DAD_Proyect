@@ -272,14 +272,14 @@ public class EmpleadosGUI extends javax.swing.JFrame {
             if(passwordCheckBox.isSelected()){
                 if(compararPassword()){
                     actualizarDatosEmpleado();
-                    controlador.actualizarEmpleado(empleado,new String (passwordField1.getPassword()));
+                    controlador.actualizarEmpleado(empleado,empleado.getNif(),new String (passwordField1.getPassword()));
                     nCoicidenLabel.setVisible(false);
                 }else{
                     nCoicidenLabel.setVisible(true);
                 }              
             }else{
                 actualizarDatosEmpleado();
-                controlador.actualizarEmpleado(empleado);
+                controlador.actualizarEmpleado(empleado,empleado.getNif());
             }
         } catch (SQLException ex) {
             Logger.getLogger(EmpleadosGUI.class.getName()).log(Level.SEVERE, null, ex);

@@ -441,6 +441,9 @@
                     <Property name="displayedMnemonicIndex" type="int" value="4"/>
                     <Property name="iconTextGap" type="int" value="0"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="crearEmpleadoButtonActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="borrarEmpleadoButton">
                   <Properties>
@@ -449,6 +452,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Borrar"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="borrarEmpleadoButtonActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="actualizarEmpleadoButton">
                   <Properties>

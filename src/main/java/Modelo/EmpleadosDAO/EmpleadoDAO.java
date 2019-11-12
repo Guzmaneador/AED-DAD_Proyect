@@ -1,5 +1,6 @@
 package Modelo.EmpleadosDAO;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -8,5 +9,6 @@ import java.util.ArrayList;
  */
 public interface EmpleadoDAO {
     public ArrayList<EmpleadoVO> listaEmpleadosVO() ;
-
+    public void borarEmpleado(String nif) throws SQLException;
+    
 }

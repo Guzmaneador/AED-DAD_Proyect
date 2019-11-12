@@ -13,11 +13,12 @@ import java.util.ArrayList;
 public interface Modelo {
     public void start(ArrayList<String> comandosSQL) throws SQLException;
     public EmpleadoVO login(ArrayList<String> userPass)throws SQLException;
-    public void actualizarEmpleado(EmpleadoVO empleado) throws SQLException;
-    public void actualizarEmpleado(EmpleadoVO empleado,String password) throws SQLException;
+    public void actualizarEmpleado(EmpleadoVO empleado,String nif) throws SQLException;
+    public void actualizarEmpleado(EmpleadoVO empleado,String nif,String password) throws SQLException;
     public ArrayList<Integer> dameDepartamentos();
     public DepartamentoVO dameDepartamento(int id);
     public void actualizarDepartamento(DepartamentoVO departamento,int id);
     public ArrayList<DepartamentoVO> listaDepartamentosVOModelo();
     public ArrayList<EmpleadoVO> listaEmpleadoVOModelo();
+    public void borrarEmpleadoModelo(String nif);
 }

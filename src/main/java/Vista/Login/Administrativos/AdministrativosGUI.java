@@ -9,7 +9,10 @@ import Modelo.ModeloImpl;
 import Vista.Login.Empleado.EmpleadosGUI;
 import Vista.VistaImpl;
 import static java.lang.Thread.sleep;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -201,9 +204,19 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         crearEmpleadoButton.setText("Crear");
         crearEmpleadoButton.setDisplayedMnemonicIndex(4);
         crearEmpleadoButton.setIconTextGap(0);
+        crearEmpleadoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crearEmpleadoButtonActionPerformed(evt);
+            }
+        });
 
         borrarEmpleadoButton.setIcon(new ImageIcon("src/main/java/Vista/Png/delete-x1.png"));
         borrarEmpleadoButton.setText("Borrar");
+        borrarEmpleadoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                borrarEmpleadoButtonActionPerformed(evt);
+            }
+        });
 
         actualizarEmpleadoButton.setIcon(new ImageIcon("src/main/java/Vista/Png/update-x1.png"));
         actualizarEmpleadoButton.setText("Actualizar");
@@ -714,18 +727,19 @@ public class AdministrativosGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_dniComboBoxActionPerformed
 
     private void actualizarEmpleadoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarEmpleadoButtonActionPerformed
-         try {
+        String nif = empleadoTratado.getNif();
+        try {
             if(passwordCheckBox.isSelected()){
                 if(compararPassword()){
                     actualizarDatosEmpleado();
-                    controlador.actualizarEmpleado(empleado,new String (passwordField1.getPassword()));
+                    controlador.actualizarEmpleado(empleadoTratado,nif,new String (passwordField1.getPassword()));
                     nCoicidenLabel.setVisible(false);
                 }else{
                     nCoicidenLabel.setVisible(true);
                 }              
             }else{
                 actualizarDatosEmpleado();
-                controlador.actualizarEmpleado(empleado);
+                controlador.actualizarEmpleado(empleadoTratado,nif);
             }
         } catch (SQLException ex) {
             Logger.getLogger(EmpleadosGUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -769,6 +783,14 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         passwordPanel.setVisible(false);
         nCoicidenLabel.setVisible(false);
     }//GEN-LAST:event_passwordCheckBoxActionPerformed
+
+    private void borrarEmpleadoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarEmpleadoButtonActionPerformed
+        controlador.borrarEmpleadoControlador(empleadoTratado.getNif());
+    }//GEN-LAST:event_borrarEmpleadoButtonActionPerformed
+
+    private void crearEmpleadoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearEmpleadoButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_crearEmpleadoButtonActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
@@ -976,20 +998,28 @@ public class AdministrativosGUI extends javax.swing.JFrame {
     private boolean compararPassword(){
         boolean coinciden = false;
         if(new String(passwordField1.getPassword()).equals(new String (passwordField2.getPassword())))
-            coinciden=true;       
+             coinciden=true;       
         return coinciden;           
     }
-    private void actualizarDatosEmpleado(){
-        empleadoTratado.setNif(nifTextField.getText());
-        empleadoTratado.setNombre(nombreTextField.getText());
-        empleadoTratado.setOficio(oficioTextField.getText());
-        if(empleadoRadioButton.isSelected())
-            empleadoTratado.setTipo("Empleado");
-        else
-            empleadoTratado.setTipo("Administrativo");
-//        empleadoTratado.setFechaAlta(fechaAlta);
-
-        
+    private void actualizarDatosEmpleado() {
+            try {
+                empleadoTratado.setNif(nifTextField.getText());
+                empleadoTratado.setNombre(nombreTextField.getText());
+                empleadoTratado.setOficio(oficioTextField.getText());
+                if(empleadoRadioButton.isSelected())
+                    empleadoTratado.setTipo("Empleado");
+                else
+                    empleadoTratado.setTipo("Administrativo");
+                SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-mm-dd");
+                java.util.Date date = sdf1.parse(fechaAltaTextField.getText());
+                java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+                empleadoTratado.setFechaAlta(sqlDate);
+                if(!resultSaldoLabel.getText().equals("%"))
+                    empleadoTratado.setSalario(Double.parseDouble(resultSaldoLabel.getText())); 
+                empleadoTratado.setId(Integer.parseInt(idTextField.getText()));
+            } catch (ParseException ex) {
+                Logger.getLogger(AdministrativosGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
     
 }

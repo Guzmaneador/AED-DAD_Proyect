@@ -73,12 +73,12 @@ public class ControladorImpl implements Controlador {
     }
     
     @Override
-    public void actualizarEmpleado(EmpleadoVO empleado) throws SQLException{
-        modelo.actualizarEmpleado(empleado);
+    public void actualizarEmpleado(EmpleadoVO empleado,String nif) throws SQLException{
+        modelo.actualizarEmpleado(empleado,nif);
     }
     @Override
-    public void actualizarEmpleado(EmpleadoVO empleado,String password) throws SQLException{
-        modelo.actualizarEmpleado(empleado,password);
+    public void actualizarEmpleado(EmpleadoVO empleado,String nif,String password) throws SQLException{
+        modelo.actualizarEmpleado(empleado,nif,password);
     }
     
     public ArrayList<Integer> obtenerDepartamentos(){
@@ -99,11 +99,13 @@ public class ControladorImpl implements Controlador {
     } 
     @Override
     public ArrayList<EmpleadoVO> listaEmpleadosControlador(){
-                return modelo.listaEmpleadoVOModelo();
-
-        
+                return modelo.listaEmpleadoVOModelo();  
     }
     
+    @Override
+    public void borrarEmpleadoControlador(String nif){
+        modelo.borrarEmpleadoModelo(nif);
+    }
     
     
    

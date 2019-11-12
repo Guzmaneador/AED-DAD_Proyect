@@ -52,6 +52,7 @@ public class LoginGUI extends javax.swing.JFrame {
         notificarLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         Panel.setBackground(new java.awt.Color(51, 153, 255));
 

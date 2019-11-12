@@ -48,11 +48,11 @@ public class ModeloImpl implements Modelo{
 
     }
     
-    public void actualizarEmpleado(EmpleadoVO empleado) throws SQLException{
-        empleadoDao.update(empleado);
+    public void actualizarEmpleado(EmpleadoVO empleado,String nif) throws SQLException{
+        empleadoDao.update(empleado,nif);
     }
-    public void actualizarEmpleado(EmpleadoVO empleado,String password) throws SQLException{
-        empleadoDao.update(empleado,password);
+    public void actualizarEmpleado(EmpleadoVO empleado,String nif,String password) throws SQLException{
+        empleadoDao.update(empleado,nif,password);
     }
     public ArrayList<Integer> dameDepartamentos(){
         return departamentosDao.listaDepartamentos();
@@ -70,8 +70,11 @@ public class ModeloImpl implements Modelo{
     
     public ArrayList<EmpleadoVO> listaEmpleadoVOModelo(){
                 return empleadoDao.listaEmpleadosVO();
-   
     }
     
+    @Override
+    public void borrarEmpleadoModelo(String nif){
+        empleadoDao.borarEmpleado(nif);
+    }
 
 }

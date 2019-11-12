@@ -11,11 +11,13 @@ import java.util.ArrayList;
  */
 public interface Controlador {
     public void iniciar();
-    public void actualizarEmpleado(EmpleadoVO empleado) throws SQLException;
-    public void actualizarEmpleado(EmpleadoVO empleado,String password) throws SQLException;
+    public void actualizarEmpleado(EmpleadoVO empleado,String nif) throws SQLException;
+    public void actualizarEmpleado(EmpleadoVO empleado,String nif,String password) throws SQLException;
     public void login(ArrayList<String> passUser) throws SQLException;
     public DepartamentoVO obtenerDepartamento(int id);
     public void actualizarDepartamento(DepartamentoVO departamento,int id);
     public ArrayList<DepartamentoVO> listaDepartamentosVOControlador();
     public ArrayList<EmpleadoVO> listaEmpleadosControlador();
+    public void borrarEmpleadoControlador(String nif);
+    
 }

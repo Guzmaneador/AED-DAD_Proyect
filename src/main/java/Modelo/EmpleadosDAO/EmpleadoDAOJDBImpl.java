@@ -26,13 +26,15 @@ public class EmpleadoDAOJDBImpl implements EmpleadoDAO{
     private final String SQL_SELECT_ALL= "SELECT * FROM empleados";
     private final String SQL_SELECT_EMPLEADO= "SELECT * FROM empleados WHERE nombre=?";
     private final String SQL_UPDATE_PASSWORD="UPDATE login SET password=AES_ENCRYPT('NoLoVesJeJe', ?) WHERE nif=?";
-    private final String SQL_UPDATE = "UPDATE empleados SET nif=?, nombre=?, tipo=?, oficio=?, fecha_alta=?, salario=?, id=? WHERE nombre=?";
+    private final String SQL_UPDATE = "UPDATE empleados SET nif=?, nombre=?, tipo=?, oficio=?, fecha_alta=?, salario=?, id=? WHERE nif=?";
+    private final String SQL_DELETE = "DELET FROM empleados WHERE nif=?";
+    private final String SQL_INSERT = "Insert INTO empleados VALUES ('?','?','?','?','?','?','?');";
 
     public EmpleadoDAOJDBImpl() {
     }
     
     
-    public String update(EmpleadoVO empleado) throws SQLException {
+    public String update(EmpleadoVO empleado,String nif) throws SQLException {
         conexion = pool.getConnection();
        PreparedStatement miPreStatment= conexion.prepareCall(SQL_UPDATE);
        miPreStatment.setString(1, empleado.getNif());
@@ -42,7 +44,7 @@ public class EmpleadoDAOJDBImpl implements EmpleadoDAO{
        miPreStatment.setDate(5, empleado.getFechaAltaDate());
        miPreStatment.setDouble(6, empleado.getSalario());
        miPreStatment.setInt(7, empleado.getId());
-       miPreStatment.setString(8, empleado.getNombre());
+       miPreStatment.setString(8, nif);
        System.out.println(miPreStatment);
        miPreStatment.executeUpdate();
        return "Empleado Actualizado correctamente";
@@ -50,7 +52,7 @@ public class EmpleadoDAOJDBImpl implements EmpleadoDAO{
 /*
     Sobre craga de metodos al tener diferente firma en la cual una incluira la contraseña y en la otra no
     */
-    public String update (EmpleadoVO empleado,String password) throws SQLException {
+    public String update (EmpleadoVO empleado, String nif ,String password) throws SQLException {
         conexion = pool.getConnection();
        PreparedStatement miPreStatment= conexion.prepareCall(SQL_UPDATE);
        miPreStatment.setString(1, empleado.getNif());
@@ -60,7 +62,7 @@ public class EmpleadoDAOJDBImpl implements EmpleadoDAO{
        miPreStatment.setDate(5, empleado.getFechaAltaDate());
        miPreStatment.setDouble(6, empleado.getSalario());
        miPreStatment.setInt(7, empleado.getId());
-       miPreStatment.setString(8, empleado.getNombre());
+       miPreStatment.setString(8, nif);
         System.out.println(miPreStatment);
        miPreStatment.executeUpdate();
        
@@ -102,6 +104,38 @@ public class EmpleadoDAOJDBImpl implements EmpleadoDAO{
             Logger.getLogger(DepartamentoDAOJDBCImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listaEmpleados; 
+    }
+    
+    @Override
+    public void borarEmpleado(String nif){
+        try {
+            conexion = pool.getConnection();
+            PreparedStatement miPreStatment= conexion.prepareCall(SQL_DELETE);
+            miPreStatment.setString(1, nif);
+            System.out.println(miPreStatment);
+            miPreStatment.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(EmpleadoDAOJDBImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+    }
+    
+    public void crearEmpleado(EmpleadoVO empleado){
+        try {
+            conexion = pool.getConnection();
+            PreparedStatement miPreStatment= conexion.prepareCall(SQL_INSERT);
+            miPreStatment.setString(1, empleado.getNif());
+            miPreStatment.setString(2, empleado.getNombre());
+            miPreStatment.setString(3, empleado.getTipo());
+            miPreStatment.setString(4, empleado.getOficio());
+            miPreStatment.setDate(5, empleado.getFechaAltaDate());
+            miPreStatment.setDouble(6, empleado.getSalario());
+            miPreStatment.setInt(7, empleado.getId());
+            System.out.println(miPreStatment);
+            miPreStatment.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(EmpleadoDAOJDBImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
   
 
