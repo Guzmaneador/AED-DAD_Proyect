@@ -53,7 +53,6 @@ public class ControladorImpl implements Controlador {
         switch (empleado.getTipo()) {
             case "Empleado":
                 EmpleadosGUI EmplGui = new EmpleadosGUI(empleado);
-//                logGui.dispose();
                 EmplGui.setVisible(true);
                 EmplGui.setLocationRelativeTo(null);
                 
@@ -64,6 +63,8 @@ public class ControladorImpl implements Controlador {
                 AdminGui.setVisible(true);
                 AdminGui.setLocationRelativeTo(null);
 //                 logGui.setVisible(false);
+//                logGui.dispose();
+
 
                 break;
             default:

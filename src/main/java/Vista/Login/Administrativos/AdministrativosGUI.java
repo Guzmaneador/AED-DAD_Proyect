@@ -7,6 +7,7 @@ import Modelo.DepartamentosDAO.DepartamentoVO;
 import Modelo.EmpleadosDAO.EmpleadoVO;
 import Modelo.ModeloImpl;
 import Vista.Login.Empleado.EmpleadosGUI;
+import Vista.Login.LoginGUI;
 import Vista.VistaImpl;
 import static java.lang.Thread.sleep;
 import java.sql.Date;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -616,6 +618,11 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         jButton3.setSelectedIcon(new ImageIcon("src/main/java/Vista/Png/info-x2.png"));
         jButton3.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         logoUser.setIcon(new ImageIcon("src/main/java/Vista/Png/login-x1.png"));
 
@@ -752,7 +759,10 @@ public class AdministrativosGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_actualizarEmpleadoButtonActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        LoginGUI miLogin =  new LoginGUI();
+        miLogin.setVisible(true);
+        miLogin.setLocationRelativeTo(null);//hace que La ventana salga Centrada
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void porcentajeSpinnerFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_porcentajeSpinnerFocusLost
@@ -797,6 +807,10 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         actualizarDatosNuevoEmpleado();
         controlador.crearEmpleadoControlador(empleadoTratado);
     }//GEN-LAST:event_crearEmpleadoButtonActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        JOptionPane.showMessageDialog(null, "Aplicacion creada por Guzman Martinez Santos\n para proyecta de las asignatura de AED y DAD en 2ºDAM.");
+    }//GEN-LAST:event_jButton3ActionPerformed
 //
 //    /**
 //     * @param args the command line arguments

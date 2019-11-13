@@ -4,11 +4,43 @@
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
     </Component>
+    <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
+      <SubComponents>
+        <Menu class="javax.swing.JMenu" name="jMenu1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Herramientas"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Datos Modificable"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Datos del usuario"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Cerrar Sesion"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenu2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Info"/>
+          </Properties>
+        </Menu>
+      </SubComponents>
+    </Menu>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
   <SyntheticProperties>
+    <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
@@ -38,41 +70,31 @@
                                   <Component id="nombreLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Component id="nifLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Component id="oficioLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tipoLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Component id="salarioLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Component id="idLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tipoLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="tituloLabel" max="32767" attributes="0"/>
-                                          <Group type="102" attributes="0">
-                                              <Component id="nombreTextField" max="32767" attributes="0"/>
-                                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
+                                      <Component id="nombreTextField" pref="143" max="32767" attributes="0"/>
+                                      <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="empleadoRadioButton" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="administrativoRadioButton" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="tituloLabel" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="nifTextField" min="-2" pref="74" max="-2" attributes="0"/>
-                                          <Component id="oficioTextField" min="-2" pref="119" max="-2" attributes="0"/>
+                                          <Component id="oficioTextField" min="-2" pref="59" max="-2" attributes="0"/>
+                                          <Component id="nifTextField" min="-2" pref="115" max="-2" attributes="0"/>
+                                          <Component id="tipoTextField" min="-2" pref="96" max="-2" attributes="0"/>
+                                          <Component id="fechaAltaTextField" alignment="0" min="-2" pref="45" max="-2" attributes="0"/>
+                                          <Component id="salarioTextField" alignment="0" min="-2" pref="128" max="-2" attributes="0"/>
+                                          <Component id="idTextField" min="-2" pref="45" max="-2" attributes="0"/>
                                       </Group>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="fechaAltaTextField" pref="119" max="32767" attributes="0"/>
-                                          <Component id="salarioTextField" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="idTextField" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -90,53 +112,49 @@
                       <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="31" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               <Component id="tituloLabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="nombreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="nombreTextField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="nifLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="nifTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="nifLabel" max="32767" attributes="0"/>
+                  <Component id="nifTextField" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="oficioLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="oficioTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="oficioLabel" max="32767" attributes="0"/>
+                  <Component id="oficioTextField" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="tipoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="empleadoRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="administrativoRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="altaLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="salarioLabel" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="fechaAltaTextField" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="salarioTextField" min="-2" max="-2" attributes="0"/>
-                  </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="tipoLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="tipoTextField" min="-2" pref="19" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="idLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="idTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="altaLabel" max="32767" attributes="0"/>
+                  <Component id="fechaAltaTextField" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="salarioLabel" max="32767" attributes="0"/>
+                  <Component id="salarioTextField" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="idLabel" max="32767" attributes="0"/>
+                  <Component id="idTextField" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="passwordCheckBox" min="-2" max="-2" attributes="0"/>
@@ -144,7 +162,7 @@
               <Component id="passwordPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="42" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -195,32 +213,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nombreTextFieldActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="nifTextField">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nifTextFieldActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="oficioTextField">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="oficioTextFieldActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JRadioButton" name="empleadoRadioButton">
-      <Properties>
-        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="buttonGroup1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Empleado"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JRadioButton" name="administrativoRadioButton">
-      <Properties>
-        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="buttonGroup1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Administrativo"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JCheckBox" name="passwordCheckBox">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cambiar Contrase&#xf1;a"/>
@@ -228,15 +220,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="passwordCheckBoxActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="fechaAltaTextField">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="aaaa-mm-dd"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="salarioTextField">
-    </Component>
-    <Component class="javax.swing.JTextField" name="idTextField">
     </Component>
     <Container class="javax.swing.JPanel" name="passwordPanel">
       <Properties>
@@ -294,6 +277,18 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="salarioTextField">
+    </Component>
+    <Component class="javax.swing.JLabel" name="nifTextField">
+    </Component>
+    <Component class="javax.swing.JLabel" name="oficioTextField">
+    </Component>
+    <Component class="javax.swing.JLabel" name="fechaAltaTextField">
+    </Component>
+    <Component class="javax.swing.JLabel" name="idTextField">
+    </Component>
+    <Component class="javax.swing.JLabel" name="tipoTextField">
     </Component>
   </SubComponents>
 </Form>

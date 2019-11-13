@@ -47,19 +47,24 @@ public class EmpleadosGUI extends javax.swing.JFrame {
         salarioLabel = new javax.swing.JLabel();
         idLabel = new javax.swing.JLabel();
         nombreTextField = new javax.swing.JTextField();
-        nifTextField = new javax.swing.JTextField();
-        oficioTextField = new javax.swing.JTextField();
-        empleadoRadioButton = new javax.swing.JRadioButton();
-        administrativoRadioButton = new javax.swing.JRadioButton();
         passwordCheckBox = new javax.swing.JCheckBox();
-        fechaAltaTextField = new javax.swing.JTextField();
-        salarioTextField = new javax.swing.JTextField();
-        idTextField = new javax.swing.JTextField();
         passwordPanel = new javax.swing.JPanel();
         passwordField1 = new javax.swing.JPasswordField();
         passwordField2 = new javax.swing.JPasswordField();
         nCoicidenLabel = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        salarioTextField = new javax.swing.JLabel();
+        nifTextField = new javax.swing.JLabel();
+        oficioTextField = new javax.swing.JLabel();
+        fechaAltaTextField = new javax.swing.JLabel();
+        idTextField = new javax.swing.JLabel();
+        tipoTextField = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,32 +90,12 @@ public class EmpleadosGUI extends javax.swing.JFrame {
             }
         });
 
-        nifTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nifTextFieldActionPerformed(evt);
-            }
-        });
-
-        oficioTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                oficioTextFieldActionPerformed(evt);
-            }
-        });
-
-        buttonGroup1.add(empleadoRadioButton);
-        empleadoRadioButton.setText("Empleado");
-
-        buttonGroup1.add(administrativoRadioButton);
-        administrativoRadioButton.setText("Administrativo");
-
         passwordCheckBox.setText("Cambiar Contraseña");
         passwordCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passwordCheckBoxActionPerformed(evt);
             }
         });
-
-        fechaAltaTextField.setText("aaaa-mm-dd");
 
         passwordPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -147,6 +132,24 @@ public class EmpleadosGUI extends javax.swing.JFrame {
             }
         });
 
+        jMenu1.setText("Herramientas");
+
+        jMenuItem1.setText("Datos Modificable");
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem2.setText("Datos del usuario");
+        jMenu1.add(jMenuItem2);
+
+        jMenuItem3.setText("Cerrar Sesion");
+        jMenu1.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Info");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -162,33 +165,27 @@ public class EmpleadosGUI extends javax.swing.JFrame {
                                     .addComponent(nombreLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(nifLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(oficioLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(tipoLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(salarioLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(idLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                                    .addComponent(idLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(tipoLabel, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(21, 21, 21)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(tituloLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(nombreTextField)
-                                                .addGap(10, 10, 10))))
+                                        .addComponent(nombreTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                                        .addGap(110, 110, 110))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(empleadoRadioButton)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(administrativoRadioButton))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(tituloLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(nifTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(oficioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(fechaAltaTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                                            .addComponent(salarioTextField)
-                                            .addComponent(idTextField)))))
+                                            .addComponent(oficioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(nifTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(tipoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(fechaAltaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(salarioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(60, 60, 60)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,63 +194,52 @@ public class EmpleadosGUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(126, 126, 126)
                         .addComponent(jButton1)))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addGap(83, 83, 83))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(21, 21, 21)
                 .addComponent(tituloLabel)
-                .addGap(33, 33, 33)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nombreLabel)
                     .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nifLabel)
-                    .addComponent(nifTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(nifLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nifTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(oficioLabel)
-                    .addComponent(oficioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(oficioLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(oficioTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tipoLabel)
-                    .addComponent(empleadoRadioButton)
-                    .addComponent(administrativoRadioButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(altaLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(salarioLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(fechaAltaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(salarioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(tipoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(idLabel)
-                    .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(altaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(fechaAltaTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(salarioLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(salarioTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(idLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(idTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(passwordCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(passwordPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void nifTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nifTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nifTextFieldActionPerformed
-
-    private void oficioTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_oficioTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_oficioTextFieldActionPerformed
 
     private void nombreTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreTextFieldActionPerformed
         // TODO add your handling code here:
@@ -322,28 +308,33 @@ public class EmpleadosGUI extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton administrativoRadioButton;
     private javax.swing.JLabel altaLabel;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JRadioButton empleadoRadioButton;
-    private javax.swing.JTextField fechaAltaTextField;
+    private javax.swing.JLabel fechaAltaTextField;
     private javax.swing.JLabel idLabel;
-    private javax.swing.JTextField idTextField;
+    private javax.swing.JLabel idTextField;
     private javax.swing.JButton jButton1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JLabel nCoicidenLabel;
     private javax.swing.JLabel nifLabel;
-    private javax.swing.JTextField nifTextField;
+    private javax.swing.JLabel nifTextField;
     private javax.swing.JLabel nombreLabel;
     private javax.swing.JTextField nombreTextField;
     private javax.swing.JLabel oficioLabel;
-    private javax.swing.JTextField oficioTextField;
+    private javax.swing.JLabel oficioTextField;
     private javax.swing.JCheckBox passwordCheckBox;
     private javax.swing.JPasswordField passwordField1;
     private javax.swing.JPasswordField passwordField2;
     private javax.swing.JPanel passwordPanel;
     private javax.swing.JLabel salarioLabel;
-    private javax.swing.JTextField salarioTextField;
+    private javax.swing.JLabel salarioTextField;
     private javax.swing.JLabel tipoLabel;
+    private javax.swing.JLabel tipoTextField;
     private javax.swing.JLabel tituloLabel;
     // End of variables declaration//GEN-END:variables
 
@@ -353,10 +344,10 @@ public class EmpleadosGUI extends javax.swing.JFrame {
         oficioTextField.setText(empleado.getOficio());
         switch (empleado.getTipo()) {
             case "Empleado":
-                empleadoRadioButton.setSelected(true);
+                tipoTextField.setText("Empleado");
                 break;
             case "Administrativo":
-                administrativoRadioButton.setSelected(true);
+                tipoTextField.setText("Administrativo");
                 break;
             default:
                 throw new AssertionError();
