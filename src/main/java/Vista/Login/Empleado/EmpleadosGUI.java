@@ -3,10 +3,12 @@ package Vista.Login.Empleado;
 import Controlador.*;
 import Modelo.EmpleadosDAO.EmpleadoVO;
 import Modelo.ModeloImpl;
+import Vista.Login.LoginGUI;
 import Vista.VistaImpl;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,6 +27,7 @@ public class EmpleadosGUI extends javax.swing.JFrame {
         nCoicidenLabel.setVisible(false);
         this.empleado=empleado;
         rellenarFormulario();
+        ocultarDatos();
     }
 
     /**
@@ -59,6 +62,7 @@ public class EmpleadosGUI extends javax.swing.JFrame {
         fechaAltaTextField = new javax.swing.JLabel();
         idTextField = new javax.swing.JLabel();
         tipoTextField = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -132,20 +136,42 @@ public class EmpleadosGUI extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("jButton2");
+
         jMenu1.setText("Herramientas");
 
         jMenuItem1.setText("Datos Modificable");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setText("Datos del usuario");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         jMenuItem3.setText("Cerrar Sesion");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem3);
 
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Info");
+        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu2MouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -272,6 +298,25 @@ public class EmpleadosGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        ocultarDatos();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        mostrarDatos();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        LoginGUI miLogin =  new LoginGUI();
+        miLogin.setVisible(true);
+        miLogin.setLocationRelativeTo(null);//hace que La ventana salga Centrada
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+        JOptionPane.showMessageDialog(null, "Aplicacion creada por Guzman Martinez Santos de 2ºDAM.\n Proyecto de las asignatura de AED y DAD en CIFP Cesar Manrrique");
+    }//GEN-LAST:event_jMenu2MouseClicked
+
 //    /**
 //     * @param args the command line arguments
 //     */
@@ -314,6 +359,7 @@ public class EmpleadosGUI extends javax.swing.JFrame {
     private javax.swing.JLabel idLabel;
     private javax.swing.JLabel idTextField;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -357,9 +403,7 @@ public class EmpleadosGUI extends javax.swing.JFrame {
         idTextField.setText(Integer.toString(empleado.getId()));
     }
     private void actualizarDatosEmpleado(){
-        empleado.setNif(nifTextField.getText());
         empleado.setNombre(nombreTextField.getText());
-        empleado.setOficio(oficioTextField.getText());
     }
     private boolean compararPassword(){
         boolean coinciden = false;
@@ -369,4 +413,34 @@ public class EmpleadosGUI extends javax.swing.JFrame {
         return coinciden;
             
     }
+    public void ocultarDatos(){
+        fechaAltaTextField.setVisible(false);
+        altaLabel.setVisible(false);
+        idTextField.setVisible(false);
+        idLabel.setVisible(false);
+        nifTextField.setVisible(false);
+        nifLabel.setVisible(false);
+        oficioTextField.setVisible(false);
+        oficioLabel.setVisible(false);
+        tipoTextField.setVisible(false);
+        tipoLabel.setVisible(false); 
+        salarioTextField.setVisible(false);
+        salarioLabel.setVisible(false);
+    }
+    public void mostrarDatos(){
+        fechaAltaTextField.setVisible(true);
+        altaLabel.setVisible(true);
+        idTextField.setVisible(true);
+        idLabel.setVisible(true);
+        nifTextField.setVisible(true);
+        nifLabel.setVisible(true);
+        oficioTextField.setVisible(true);
+        oficioLabel.setVisible(true);
+        tipoTextField.setVisible(true);
+        tipoLabel.setVisible(true);
+        salarioTextField.setVisible(false);
+        salarioLabel.setVisible(false);
+    }
+    
+    
 }

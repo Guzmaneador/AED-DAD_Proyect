@@ -21,6 +21,6 @@ public interface Modelo {
     public ArrayList<DepartamentoVO> listaDepartamentosVOModelo();
     public ArrayList<EmpleadoVO> listaEmpleadoVOModelo();
     public void borrarEmpleadoModelo(String nif);
-    public void crearEmpleadoModelo(EmpleadoVO empleado);
+    public void crearEmpleadoModelo(EmpleadoVO empleado,String password);
     
 }

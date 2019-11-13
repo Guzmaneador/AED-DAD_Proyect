@@ -76,8 +76,10 @@ public class ModeloImpl implements Modelo{
     public void borrarEmpleadoModelo(String nif){
         empleadoDao.borarEmpleado(nif);
     }
-    public void crearEmpleadoModelo(EmpleadoVO empleado){
-        empleadoDao.crearEmpleado(empleado);
+    public void crearEmpleadoModelo(EmpleadoVO empleado,String password){
+        empleadoDao.crearEmpleado(empleado,password);
     }
+
+    
 
 }

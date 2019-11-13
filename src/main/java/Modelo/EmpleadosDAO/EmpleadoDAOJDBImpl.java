@@ -29,6 +29,7 @@ public class EmpleadoDAOJDBImpl implements EmpleadoDAO{
     private final String SQL_UPDATE = "UPDATE empleados SET nif=?, nombre=?, tipo=?, oficio=?, fecha_alta=?, salario=?, id=? WHERE nif=?";
     private final String SQL_DELETE = "DELET FROM empleados WHERE nif=?";
     private final String SQL_INSERT = "Insert INTO empleados VALUES (?,?,?,?,?,?,?);";
+    private final String SQL_INSERT_PASSWORD = "INSERT INTO login VALUES (?,AES_ENCRYPT('NoLoVesJeJe', ?));";
 
     public EmpleadoDAOJDBImpl() {
     }
@@ -119,7 +120,7 @@ public class EmpleadoDAOJDBImpl implements EmpleadoDAO{
         }  
     }
     
-    public void crearEmpleado(EmpleadoVO empleado){
+    public void crearEmpleado(EmpleadoVO empleado,String password){
         try {
             conexion = pool.getConnection();
             PreparedStatement miPreStatment= conexion.prepareCall(SQL_INSERT);
@@ -132,6 +133,13 @@ public class EmpleadoDAOJDBImpl implements EmpleadoDAO{
             miPreStatment.setInt(7, empleado.getId());
             System.out.println(miPreStatment);
             miPreStatment.executeUpdate();
+            
+            conexion = pool.getConnection();
+            PreparedStatement miPreStatment2= conexion.prepareCall(SQL_INSERT_PASSWORD);
+            miPreStatment2.setString(1, empleado.getNif());
+            miPreStatment2.setString(2, password);
+            System.out.println(miPreStatment2);
+            miPreStatment2.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(EmpleadoDAOJDBImpl.class.getName()).log(Level.SEVERE, null, ex);
         }

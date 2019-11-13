@@ -640,11 +640,11 @@ public class AdministrativosGUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(nombreUser, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -739,22 +739,26 @@ public class AdministrativosGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_dniComboBoxActionPerformed
 
     private void actualizarEmpleadoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarEmpleadoButtonActionPerformed
-        String nif = empleadoTratado.getNif();
-        try {
-            if(passwordCheckBox.isSelected()){
-                if(compararPassword()){
-                    actualizarDatosEmpleado();
-                    controlador.actualizarEmpleado(empleadoTratado,nif,new String (passwordField1.getPassword()));
-                    nCoicidenLabel.setVisible(false);
+        if(!camposVacios()){
+            String nif = empleadoTratado.getNif();
+            try {
+                if(passwordCheckBox.isSelected()){
+                    if(compararPassword()){
+                        actualizarDatosEmpleado();
+                        controlador.actualizarEmpleado(empleadoTratado,nif,new String (passwordField1.getPassword()));
+                        nCoicidenLabel.setVisible(false);
+                    }else{
+                        nCoicidenLabel.setVisible(true);
+                    }              
                 }else{
-                    nCoicidenLabel.setVisible(true);
-                }              
-            }else{
-                actualizarDatosEmpleado();
-                controlador.actualizarEmpleado(empleadoTratado,nif);
+                    actualizarDatosEmpleado();
+                    controlador.actualizarEmpleado(empleadoTratado,nif);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(EmpleadosGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(EmpleadosGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }else{
+            JOptionPane.showMessageDialog(null, "No puede haber campos vacios", "No te pases de listo :|", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_actualizarEmpleadoButtonActionPerformed
 
@@ -800,16 +804,29 @@ public class AdministrativosGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_passwordCheckBoxActionPerformed
 
     private void borrarEmpleadoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarEmpleadoButtonActionPerformed
-        controlador.borrarEmpleadoControlador(empleadoTratado.getNif());
+        
+        int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea borrar\n el usuario con DNI: "+empleadoTratado.getNif()+"?", "Alerta!", JOptionPane.YES_NO_OPTION);
+        if(resp == 0){
+            controlador.borrarEmpleadoControlador(empleadoTratado.getNif());
+        }
     }//GEN-LAST:event_borrarEmpleadoButtonActionPerformed
 
     private void crearEmpleadoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearEmpleadoButtonActionPerformed
-        actualizarDatosNuevoEmpleado();
-        controlador.crearEmpleadoControlador(empleadoTratado);
+        if(!camposVacios()){
+            if(compararPassword()){
+                    actualizarDatosNuevoEmpleado();
+                    controlador.crearEmpleadoControlador(empleadoTratado,new String (passwordField1.getPassword()));
+                    nCoicidenLabel.setVisible(false);
+                }else{
+                    nCoicidenLabel.setVisible(true);
+                }
+        }else{
+            JOptionPane.showMessageDialog(null, "No puede haber campos vacios", "No te pases de listo :|", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_crearEmpleadoButtonActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        JOptionPane.showMessageDialog(null, "Aplicacion creada por Guzman Martinez Santos\n para proyecta de las asignatura de AED y DAD en 2ºDAM.");
+        JOptionPane.showMessageDialog(null, "Aplicacion creada por Guzman Martinez Santos de 2ºDAM.\n Proyecto de las asignatura de AED y DAD en CIFP Cesar Manrrique");
     }//GEN-LAST:event_jButton3ActionPerformed
 //
 //    /**
@@ -1045,7 +1062,7 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         empleadoTratado = new EmpleadoVO();
             try {
                 empleadoTratado.setNif(nifTextField.getText());
-                empleadoTratado.setNombre(nombreTextField.getText());
+                empleadoTratado.setNombre(nombreEmpleadoTextField.getText());
                 empleadoTratado.setOficio(oficioTextField.getText());
                 if(empleadoRadioButton.isSelected())
                     empleadoTratado.setTipo("Empleado");
@@ -1054,12 +1071,35 @@ public class AdministrativosGUI extends javax.swing.JFrame {
                 SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-mm-dd");
                 java.util.Date date = sdf1.parse(fechaAltaTextField.getText());
                 java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-                empleadoTratado.setFechaAlta(sqlDate);
+                empleadoTratado.setFechaAlta(sqlDate);    
                 empleadoTratado.setSalario(Double.parseDouble(porcentajeSpinner.getValue().toString())); 
                 empleadoTratado.setId(Integer.parseInt(idTextField.getText()));
             } catch (ParseException ex) {
                 Logger.getLogger(AdministrativosGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
+    }
+    
+    public boolean camposVacios(){
+        boolean vacio = false;
+        if(nifTextField.getText().length()==0)
+            vacio=true;
+        if(nombreEmpleadoTextField.getText().length()==0)
+            vacio=true;
+        if(oficioTextField.getText().length()==0)
+            vacio=true;
+        if(fechaAltaTextField.getText().length()==0)
+            vacio=true;
+        if(idTextField.getText().length()==0)
+            vacio=true;
+        if(passwordField1.getText().length()==0)
+            vacio=true;
+        if(passwordField2.getText().length()==0)
+            vacio=true;
+
+        
+        
+        
+        return vacio;
     }
     
 }

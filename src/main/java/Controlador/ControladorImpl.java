@@ -108,8 +108,8 @@ public class ControladorImpl implements Controlador {
         modelo.borrarEmpleadoModelo(nif);
     }
     
-    public void crearEmpleadoControlador(EmpleadoVO empleado){
-        modelo.crearEmpleadoModelo(empleado);
+    public void crearEmpleadoControlador(EmpleadoVO empleado,String password){
+        modelo.crearEmpleadoModelo(empleado,password);
     }
     
     

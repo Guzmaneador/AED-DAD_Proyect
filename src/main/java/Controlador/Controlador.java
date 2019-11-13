@@ -19,7 +19,7 @@ public interface Controlador {
     public ArrayList<DepartamentoVO> listaDepartamentosVOControlador();
     public ArrayList<EmpleadoVO> listaEmpleadosControlador();
     public void borrarEmpleadoControlador(String nif);
-    public void crearEmpleadoControlador(EmpleadoVO empleado);
+    public void crearEmpleadoControlador(EmpleadoVO empleado,String password);
     
     
 }
