@@ -40,6 +40,7 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         modificarEmpleadoPanel.setVisible(false);
         passwordPanel.setVisible(false);
         nCoicidenLabel.setVisible(false);
+        ocultarDatos();
         cargarDepartamentos(listaDepartamento);
         crearDepartamentosTabla();
         this.empleado=empleado;
@@ -61,6 +62,24 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         buttonGroup1 = new javax.swing.ButtonGroup();
         empresasTabbedPane = new javax.swing.JTabbedPane();
+        jPanel3 = new javax.swing.JPanel();
+        tituloLabel = new javax.swing.JLabel();
+        nombreTextField1 = new javax.swing.JTextField();
+        nombreLabel2 = new javax.swing.JLabel();
+        nifLabel1 = new javax.swing.JLabel();
+        nifTextField1 = new javax.swing.JLabel();
+        oficioLabel1 = new javax.swing.JLabel();
+        oficioTextField1 = new javax.swing.JLabel();
+        tipoLabel1 = new javax.swing.JLabel();
+        tipoTextField1 = new javax.swing.JLabel();
+        altaLabel1 = new javax.swing.JLabel();
+        fechaAltaTextField1 = new javax.swing.JLabel();
+        salarioLabel1 = new javax.swing.JLabel();
+        salarioTextField1 = new javax.swing.JLabel();
+        idLabel2 = new javax.swing.JLabel();
+        idTextField1 = new javax.swing.JLabel();
+        actualizarEmpleadoButton1 = new javax.swing.JButton();
+        masInfoCheckBox = new javax.swing.JCheckBox();
         jPanel1 = new javax.swing.JPanel();
         modificarEmpleadoPanel = new javax.swing.JPanel();
         idTextField = new javax.swing.JTextField();
@@ -108,7 +127,6 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         borrarDepartamentoButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         depatamentosTable = new javax.swing.JTable();
-        jPanel3 = new javax.swing.JPanel();
         dniUser = new javax.swing.JLabel();
         nombreUser = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -141,6 +159,128 @@ public class AdministrativosGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+
+        tituloLabel.setText("DATOS EMPLEADO");
+
+        nombreTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombreTextField1ActionPerformed(evt);
+            }
+        });
+
+        nombreLabel2.setText("Nombre: ");
+
+        nifLabel1.setText("NIF: ");
+
+        oficioLabel1.setText("Oficio: ");
+
+        tipoLabel1.setText("Tipo: ");
+
+        altaLabel1.setText("Fecha Alta: ");
+
+        salarioLabel1.setText("Salario: ");
+
+        idLabel2.setText("ID: ");
+
+        actualizarEmpleadoButton1.setIcon(new ImageIcon("src/main/java/Vista/Png/update-x1.png"));
+        actualizarEmpleadoButton1.setText("Actualizar");
+        actualizarEmpleadoButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actualizarEmpleadoButton1ActionPerformed(evt);
+            }
+        });
+
+        masInfoCheckBox.setText("Mostrar mas Informacion");
+        masInfoCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                masInfoCheckBoxActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addComponent(tituloLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(altaLabel1)
+                    .addComponent(nombreLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(nifLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(oficioLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(salarioLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(idLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(tipoLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(idTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(nombreTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)))
+                        .addGap(376, 376, 376))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(actualizarEmpleadoButton1))
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(salarioTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(oficioTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(nifTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                                .addComponent(fechaAltaTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tipoTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(masInfoCheckBox)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(masInfoCheckBox)
+                .addGap(4, 4, 4)
+                .addComponent(tituloLabel)
+                .addGap(30, 30, 30)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nombreLabel2)
+                    .addComponent(nombreTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(nifLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nifTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(oficioLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(oficioTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tipoLabel1)
+                    .addComponent(tipoTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(altaLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(fechaAltaTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(salarioLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(salarioTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(idLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(idTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(actualizarEmpleadoButton1)
+                .addContainerGap(234, Short.MAX_VALUE))
+        );
+
+        empresasTabbedPane.addTab("Usuario", jPanel3);
 
         modificarEmpleadoPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -564,19 +704,6 @@ public class AdministrativosGUI extends javax.swing.JFrame {
 
         empresasTabbedPane.addTab("Departamentos", jPanel2);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 641, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 581, Short.MAX_VALUE)
-        );
-
-        empresasTabbedPane.addTab("Usuario", jPanel3);
-
         jButton1.setIcon(new ImageIcon("src/main/java/Vista/Png/cancel-x1.png"));
         jButton1.setBorder(null);
         jButton1.setBorderPainted(false);
@@ -828,6 +955,21 @@ public class AdministrativosGUI extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         JOptionPane.showMessageDialog(null, "Aplicacion creada por Guzman Martinez Santos de 2ºDAM.\n Proyecto de las asignatura de AED y DAD en CIFP Cesar Manrrique");
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void nombreTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombreTextField1ActionPerformed
+
+    private void actualizarEmpleadoButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarEmpleadoButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_actualizarEmpleadoButton1ActionPerformed
+
+    private void masInfoCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_masInfoCheckBoxActionPerformed
+        if(masInfoCheckBox.isSelected())
+            mostrarDatos();
+        else
+            ocultarDatos();
+    }//GEN-LAST:event_masInfoCheckBoxActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
@@ -867,8 +1009,10 @@ public class AdministrativosGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton actualizarDepartamentoButton;
     private javax.swing.JButton actualizarEmpleadoButton;
+    private javax.swing.JButton actualizarEmpleadoButton1;
     private javax.swing.JRadioButton administrativoRadioButton;
     private javax.swing.JLabel altaLabel;
+    private javax.swing.JLabel altaLabel1;
     private javax.swing.JButton borrarDepartamentoButton;
     private javax.swing.JButton borrarEmpleadoButton;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -883,10 +1027,13 @@ public class AdministrativosGUI extends javax.swing.JFrame {
     private javax.swing.JTable empleadosTable;
     private javax.swing.JTabbedPane empresasTabbedPane;
     private javax.swing.JTextField fechaAltaTextField;
+    private javax.swing.JLabel fechaAltaTextField1;
     private javax.swing.JLabel idLabel;
     private javax.swing.JLabel idLabel1;
+    private javax.swing.JLabel idLabel2;
     private javax.swing.JSpinner idSpinner;
     private javax.swing.JTextField idTextField;
+    private javax.swing.JLabel idTextField1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -906,18 +1053,25 @@ public class AdministrativosGUI extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel logoUser;
+    private javax.swing.JCheckBox masInfoCheckBox;
     private javax.swing.JPanel modificarDepartamentoPanel;
     private javax.swing.JPanel modificarEmpleadoPanel;
     private javax.swing.JLabel nCoicidenLabel;
     private javax.swing.JLabel nifLabel;
+    private javax.swing.JLabel nifLabel1;
     private javax.swing.JTextField nifTextField;
+    private javax.swing.JLabel nifTextField1;
     private javax.swing.JTextField nombreEmpleadoTextField;
     private javax.swing.JLabel nombreLabel;
     private javax.swing.JLabel nombreLabel1;
+    private javax.swing.JLabel nombreLabel2;
     private javax.swing.JTextField nombreTextField;
+    private javax.swing.JTextField nombreTextField1;
     private javax.swing.JLabel nombreUser;
     private javax.swing.JLabel oficioLabel;
+    private javax.swing.JLabel oficioLabel1;
     private javax.swing.JTextField oficioTextField;
+    private javax.swing.JLabel oficioTextField1;
     private javax.swing.JCheckBox passwordCheckBox;
     private javax.swing.JPasswordField passwordField1;
     private javax.swing.JPasswordField passwordField2;
@@ -926,7 +1080,12 @@ public class AdministrativosGUI extends javax.swing.JFrame {
     private javax.swing.JLabel resultSaldoLabel;
     private javax.swing.JLabel salarioField;
     private javax.swing.JLabel salarioLabel;
+    private javax.swing.JLabel salarioLabel1;
+    private javax.swing.JLabel salarioTextField1;
     private javax.swing.JLabel tipoLabel;
+    private javax.swing.JLabel tipoLabel1;
+    private javax.swing.JLabel tipoTextField1;
+    private javax.swing.JLabel tituloLabel;
     private javax.swing.JLabel ubicacionLabel;
     private javax.swing.JTextField ubicacionTextField;
     // End of variables declaration//GEN-END:variables
@@ -977,7 +1136,23 @@ public class AdministrativosGUI extends javax.swing.JFrame {
     //---------Empleado-------//
     public void cargarDatosEmpleados(){
         dniUser.setText(empleado.getNif());
+        nifTextField1.setText(empleado.getNif());
         nombreUser.setText(empleado.getNombre());
+        nombreTextField1.setText(empleado.getNombre());
+        oficioTextField1.setText(empleado.getOficio());
+        switch (empleado.getTipo()) {
+            case "Empleado":
+                tipoTextField1.setText("Empleado");
+                break;
+            case "Administrativo":
+                tipoTextField1.setText("Administrativo");
+                break;
+            default:
+                throw new AssertionError();
+        }
+        fechaAltaTextField1.setText(empleado.getFechaAlta());
+        salarioTextField1.setText(String.valueOf(empleado.getSalario()));
+        idTextField1.setText(Integer.toString(empleado.getId()));
         getListaEmpleados();
         cargarEmpleadosDni();
         crearEmpleadoTabla();
@@ -1095,11 +1270,35 @@ public class AdministrativosGUI extends javax.swing.JFrame {
             vacio=true;
         if(passwordField2.getText().length()==0)
             vacio=true;
-
-        
-        
-        
         return vacio;
+    }
+    public void ocultarDatos(){
+        fechaAltaTextField1.setVisible(false);
+        altaLabel1.setVisible(false);
+        idTextField1.setVisible(false);
+        idLabel1.setVisible(false);
+        nifTextField1.setVisible(false);
+        nifLabel1.setVisible(false);
+        oficioTextField1.setVisible(false);
+        oficioLabel1.setVisible(false);
+        tipoTextField1.setVisible(false);
+        tipoLabel1.setVisible(false); 
+        salarioTextField1.setVisible(false);
+        salarioLabel1.setVisible(false);
+    }
+    public void mostrarDatos(){
+        fechaAltaTextField1.setVisible(true);
+        altaLabel1.setVisible(true);
+        idTextField1.setVisible(true);
+        idLabel1.setVisible(true);
+        nifTextField1.setVisible(true);
+        nifLabel1.setVisible(true);
+        oficioTextField1.setVisible(true);
+        oficioLabel1.setVisible(true);
+        tipoTextField1.setVisible(true);
+        tipoLabel1.setVisible(true);
+        salarioTextField1.setVisible(false);
+        salarioLabel1.setVisible(false);
     }
     
 }

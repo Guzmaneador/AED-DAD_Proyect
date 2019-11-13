@@ -9,6 +9,8 @@ import Controlador.Controlador;
 import Controlador.ControladorImpl;
 import Modelo.ModeloImpl;
 import Vista.VistaImpl;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -29,6 +31,10 @@ public class LoginGUI extends javax.swing.JFrame {
      */
     public LoginGUI() {
         initComponents();
+//        Image icon = new ImageIcon(getClass().getResource("src/main/java/Vista/Png/escudo.png")).getImage();
+//        setIconImage(icon);
+//            Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("src/main/java/Vista/Png/escudo.png"));
+//            setIconImage(icon);
         Panel.setVisible(true);
     }
 
