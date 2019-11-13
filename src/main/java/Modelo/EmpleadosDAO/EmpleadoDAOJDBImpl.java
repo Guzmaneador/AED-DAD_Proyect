@@ -27,6 +27,7 @@ public class EmpleadoDAOJDBImpl implements EmpleadoDAO{
     private final String SQL_SELECT_EMPLEADO= "SELECT * FROM empleados WHERE nombre=?";
     private final String SQL_UPDATE_PASSWORD="UPDATE login SET password=AES_ENCRYPT('NoLoVesJeJe', ?) WHERE nif=?";
     private final String SQL_UPDATE = "UPDATE empleados SET nif=?, nombre=?, tipo=?, oficio=?, fecha_alta=?, salario=?, id=? WHERE nif=?";
+    private final String SQL_UPDATE_NOMBRE= "UPDATE empleados SET nombre=? WHERE nif=?";
     private final String SQL_DELETE = "DELET FROM empleados WHERE nif=?";
     private final String SQL_INSERT = "Insert INTO empleados VALUES (?,?,?,?,?,?,?);";
     private final String SQL_INSERT_PASSWORD = "INSERT INTO login VALUES (?,AES_ENCRYPT('NoLoVesJeJe', ?));";
@@ -34,6 +35,36 @@ public class EmpleadoDAOJDBImpl implements EmpleadoDAO{
     public EmpleadoDAOJDBImpl() {
     }
     
+    public void updateNombre(String nif,String nombre){
+        try {
+            conexion = pool.getConnection();
+            PreparedStatement miPreStatment= conexion.prepareCall(SQL_UPDATE_NOMBRE);
+            miPreStatment.setString(2, nombre);
+            miPreStatment.setString(1, nif);
+            System.out.println(miPreStatment);
+            miPreStatment.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(EmpleadoDAOJDBImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void updateNombre(String nif,String nombre,String password){
+        try {
+            conexion = pool.getConnection();
+            PreparedStatement miPreStatment= conexion.prepareCall(SQL_UPDATE_NOMBRE);
+            miPreStatment.setString(1, nombre);
+            miPreStatment.setString(2, nif);
+            System.out.println(miPreStatment);
+            miPreStatment.executeUpdate();
+            
+            conexion = pool.getConnection();
+            PreparedStatement miPreStatment2= conexion.prepareCall(SQL_UPDATE_PASSWORD);
+            miPreStatment2.setString(1, password);
+            miPreStatment2.setString(2, nif);
+            miPreStatment2.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(EmpleadoDAOJDBImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     public String update(EmpleadoVO empleado,String nif) throws SQLException {
         conexion = pool.getConnection();

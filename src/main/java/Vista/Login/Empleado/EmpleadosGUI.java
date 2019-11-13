@@ -24,6 +24,8 @@ public class EmpleadosGUI extends javax.swing.JFrame {
     Controlador controlador = new ControladorImpl(new ModeloImpl(),new VistaImpl());
     public EmpleadosGUI(EmpleadoVO empleado) {
         initComponents();
+        ImageIcon icon = new ImageIcon("icon/escudo.png");
+        setIconImage(icon.getImage());
         passwordPanel.setVisible(false);
         nCoicidenLabel.setVisible(false);
         this.empleado=empleado;

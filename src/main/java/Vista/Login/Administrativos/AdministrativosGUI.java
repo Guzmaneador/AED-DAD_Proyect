@@ -39,7 +39,10 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         modificarDepartamentoPanel.setVisible(false);
         modificarEmpleadoPanel.setVisible(false);
         passwordPanel.setVisible(false);
+        passwordPanel1.setVisible(false);
         nCoicidenLabel.setVisible(false);
+        ImageIcon icon = new ImageIcon("icon/escudo.png");
+        setIconImage(icon.getImage());
         ocultarDatos();
         cargarDepartamentos(listaDepartamento);
         crearDepartamentosTabla();
@@ -80,6 +83,11 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         idTextField1 = new javax.swing.JLabel();
         actualizarEmpleadoButton1 = new javax.swing.JButton();
         masInfoCheckBox = new javax.swing.JCheckBox();
+        passwordCheckBox1 = new javax.swing.JCheckBox();
+        passwordPanel1 = new javax.swing.JPanel();
+        passwordField3 = new javax.swing.JPasswordField();
+        passwordField4 = new javax.swing.JPasswordField();
+        nCoicidenLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         modificarEmpleadoPanel = new javax.swing.JPanel();
         idTextField = new javax.swing.JTextField();
@@ -197,6 +205,41 @@ public class AdministrativosGUI extends javax.swing.JFrame {
             }
         });
 
+        passwordCheckBox1.setText("Cambiar Contraseña");
+        passwordCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordCheckBox1ActionPerformed(evt);
+            }
+        });
+
+        passwordPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        nCoicidenLabel1.setText("*No coiciden ");
+
+        javax.swing.GroupLayout passwordPanel1Layout = new javax.swing.GroupLayout(passwordPanel1);
+        passwordPanel1.setLayout(passwordPanel1Layout);
+        passwordPanel1Layout.setHorizontalGroup(
+            passwordPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(passwordPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(passwordPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(passwordField4, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                    .addComponent(passwordField3, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                    .addComponent(nCoicidenLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
+        );
+        passwordPanel1Layout.setVerticalGroup(
+            passwordPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(passwordPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(nCoicidenLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(passwordField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(passwordField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -204,41 +247,49 @@ public class AdministrativosGUI extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(63, 63, 63)
                 .addComponent(tituloLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(altaLabel1)
-                    .addComponent(nombreLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(nifLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(oficioLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(salarioLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(idLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(tipoLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(idTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                                .addGap(3, 3, 3)
-                                .addComponent(nombreTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)))
-                        .addGap(376, 376, 376))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(actualizarEmpleadoButton1))
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(salarioTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(oficioTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(nifTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                                .addComponent(fechaAltaTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(tipoTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(masInfoCheckBox)
                 .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(altaLabel1)
+                            .addComponent(nombreLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(nifLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(oficioLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(salarioLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(idLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(tipoLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(idTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                        .addGap(3, 3, 3)
+                                        .addComponent(nombreTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)))
+                                .addGap(376, 376, 376))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(salarioTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(oficioTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(nifTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                                    .addComponent(fechaAltaTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(tipoTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(passwordPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(passwordCheckBox1))
+                        .addGap(351, 351, 351))))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(134, 134, 134)
+                .addComponent(actualizarEmpleadoButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,7 +318,7 @@ public class AdministrativosGUI extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(altaLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(fechaAltaTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(salarioLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(salarioTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -275,9 +326,13 @@ public class AdministrativosGUI extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(idLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(idTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addComponent(passwordCheckBox1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(passwordPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
                 .addComponent(actualizarEmpleadoButton1)
-                .addContainerGap(234, Short.MAX_VALUE))
+                .addGap(29, 29, 29))
         );
 
         empresasTabbedPane.addTab("Usuario", jPanel3);
@@ -961,7 +1016,20 @@ public class AdministrativosGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_nombreTextField1ActionPerformed
 
     private void actualizarEmpleadoButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarEmpleadoButton1ActionPerformed
-        // TODO add your handling code here:
+       
+            if(passwordCheckBox1.isSelected()){
+                if(compararPassword2()){
+//                    actualizarDatosEmpleado();
+                    controlador.updateNombreControlador(nombreTextField1.getText(),empleado.getNif(),new String (passwordField1.getPassword()));
+                    nCoicidenLabel1.setVisible(false);
+                }else{
+                    nCoicidenLabel1.setVisible(true);
+                }              
+            }else{
+//                actualizarDatosEmpleado();
+                controlador.updateNombreControlador(nombreTextField1.getText(),empleado.getNif());
+            }
+        
     }//GEN-LAST:event_actualizarEmpleadoButton1ActionPerformed
 
     private void masInfoCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_masInfoCheckBoxActionPerformed
@@ -970,6 +1038,14 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         else
             ocultarDatos();
     }//GEN-LAST:event_masInfoCheckBoxActionPerformed
+
+    private void passwordCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordCheckBox1ActionPerformed
+        if(passwordCheckBox1.isSelected())
+        passwordPanel1.setVisible(true);
+        else
+        passwordPanel1.setVisible(false);
+        nCoicidenLabel1.setVisible(false);
+    }//GEN-LAST:event_passwordCheckBox1ActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
@@ -1057,6 +1133,7 @@ public class AdministrativosGUI extends javax.swing.JFrame {
     private javax.swing.JPanel modificarDepartamentoPanel;
     private javax.swing.JPanel modificarEmpleadoPanel;
     private javax.swing.JLabel nCoicidenLabel;
+    private javax.swing.JLabel nCoicidenLabel1;
     private javax.swing.JLabel nifLabel;
     private javax.swing.JLabel nifLabel1;
     private javax.swing.JTextField nifTextField;
@@ -1073,9 +1150,13 @@ public class AdministrativosGUI extends javax.swing.JFrame {
     private javax.swing.JTextField oficioTextField;
     private javax.swing.JLabel oficioTextField1;
     private javax.swing.JCheckBox passwordCheckBox;
+    private javax.swing.JCheckBox passwordCheckBox1;
     private javax.swing.JPasswordField passwordField1;
     private javax.swing.JPasswordField passwordField2;
+    private javax.swing.JPasswordField passwordField3;
+    private javax.swing.JPasswordField passwordField4;
     private javax.swing.JPanel passwordPanel;
+    private javax.swing.JPanel passwordPanel1;
     private javax.swing.JSpinner porcentajeSpinner;
     private javax.swing.JLabel resultSaldoLabel;
     private javax.swing.JLabel salarioField;
@@ -1213,6 +1294,12 @@ public class AdministrativosGUI extends javax.swing.JFrame {
              coinciden=true;       
         return coinciden;           
     }
+    private boolean compararPassword2(){
+        boolean coinciden = false;
+        if(new String(passwordField3.getPassword()).equals(new String (passwordField4.getPassword())))
+             coinciden=true;       
+        return coinciden;           
+    }
     private void actualizarDatosEmpleado() {
             try {
                 empleadoTratado.setNif(nifTextField.getText());
@@ -1276,7 +1363,7 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         fechaAltaTextField1.setVisible(false);
         altaLabel1.setVisible(false);
         idTextField1.setVisible(false);
-        idLabel1.setVisible(false);
+        idLabel2.setVisible(false);
         nifTextField1.setVisible(false);
         nifLabel1.setVisible(false);
         oficioTextField1.setVisible(false);

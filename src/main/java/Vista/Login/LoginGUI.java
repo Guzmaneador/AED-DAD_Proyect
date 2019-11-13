@@ -31,10 +31,11 @@ public class LoginGUI extends javax.swing.JFrame {
      */
     public LoginGUI() {
         initComponents();
-//        Image icon = new ImageIcon(getClass().getResource("src/main/java/Vista/Png/escudo.png")).getImage();
-//        setIconImage(icon);
+        ImageIcon icon = new ImageIcon("icon/escudo.png");
+        setIconImage(icon.getImage());
 //            Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("src/main/java/Vista/Png/escudo.png"));
 //            setIconImage(icon);
+//new ImageIcon(getClass().getResource("/icon/escudo.png")).getImage()
         Panel.setVisible(true);
     }
 

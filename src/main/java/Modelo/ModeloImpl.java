@@ -79,7 +79,12 @@ public class ModeloImpl implements Modelo{
     public void crearEmpleadoModelo(EmpleadoVO empleado,String password){
         empleadoDao.crearEmpleado(empleado,password);
     }
-
+    public void updateNombreModelo(String nif,String nombre){
+        empleadoDao.updateNombre(nif, nombre);
+    }
+    public void updateNombreModelo(String nif,String nombre,String password){
+        empleadoDao.updateNombre(nif, nombre,password);
+    }
     
 
 }

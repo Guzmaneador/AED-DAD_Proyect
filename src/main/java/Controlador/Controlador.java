@@ -20,6 +20,8 @@ public interface Controlador {
     public ArrayList<EmpleadoVO> listaEmpleadosControlador();
     public void borrarEmpleadoControlador(String nif);
     public void crearEmpleadoControlador(EmpleadoVO empleado,String password);
+    public void updateNombreControlador(String nif,String nombre);
+    public void updateNombreControlador(String nif,String nombre,String password);
     
     
 }

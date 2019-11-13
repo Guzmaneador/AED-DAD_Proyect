@@ -22,5 +22,7 @@ public interface Modelo {
     public ArrayList<EmpleadoVO> listaEmpleadoVOModelo();
     public void borrarEmpleadoModelo(String nif);
     public void crearEmpleadoModelo(EmpleadoVO empleado,String password);
+    public void updateNombreModelo(String nif,String nombre);
+    public void updateNombreModelo(String nif,String nombre,String password);
     
 }

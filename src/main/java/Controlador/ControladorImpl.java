@@ -112,6 +112,13 @@ public class ControladorImpl implements Controlador {
         modelo.crearEmpleadoModelo(empleado,password);
     }
     
+    public void updateNombreControlador(String nif,String nombre){
+        modelo.updateNombreModelo(nif,nombre);
+    }
+    public void updateNombreControlador(String nif,String nombre,String password){
+        modelo.updateNombreModelo(nif,nombre,password);
+    }
+    
     
    
 
