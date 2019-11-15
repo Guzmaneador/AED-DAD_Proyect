@@ -35,6 +35,7 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         ArrayList<EmpleadoVO> listaEmpleados;
         ArrayList<DepartamentoVO> listaDepartamentosVO ;
         int id ;
+        boolean camposTabla = true;
 
     public AdministrativosGUI(ArrayList<Integer> listaDepartamento,EmpleadoVO empleado) {
         initComponents();
@@ -50,6 +51,7 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         crearDepartamentosTabla();
         this.empleado=empleado;
         cargarDatosEmpleados();
+        
         
     }
 
@@ -340,7 +342,7 @@ public class AdministrativosGUI extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(idLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(idTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(passwordCheckBox1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(passwordPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -633,17 +635,17 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(modificarEmpleadoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
-                        .addComponent(jLabel5)
-                        .addGap(38, 38, 38)
-                        .addComponent(dniComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(44, 44, 44)
+                            .addComponent(modificarEmpleadoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(74, 74, 74)
+                            .addComponent(jLabel5)
+                            .addGap(38, 38, 38)
+                            .addComponent(dniComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(74, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -655,9 +657,9 @@ public class AdministrativosGUI extends javax.swing.JFrame {
                     .addComponent(dniComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(modificarEmpleadoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         empresasTabbedPane.addTab("Empleados", jPanel1);
@@ -820,7 +822,7 @@ public class AdministrativosGUI extends javax.swing.JFrame {
                     .addComponent(nombreDepartamentoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
 
         empresasTabbedPane.addTab("Departamentos", jPanel2);
@@ -948,7 +950,7 @@ public class AdministrativosGUI extends javax.swing.JFrame {
                                 .addComponent(dniUser, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(logoUser, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(empresasTabbedPane))
+                .addComponent(empresasTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE))
         );
 
         pack();
@@ -1609,13 +1611,22 @@ public class AdministrativosGUI extends javax.swing.JFrame {
             return existe;
     }
     public void cargarTablaEmpleadosDepartamento(ArrayList <EmpleadoVO> empleadosList){
+        
         DefaultTableModel modelo2 = (DefaultTableModel)empleadosDepartamentoTable.getModel();
-        modelo2.addColumn("nif");
-        modelo2.addColumn("Nombre");
-        modelo2.addColumn("tipo");
-        modelo2.addColumn("oficio");
-        modelo2.addColumn("salario");
-        modelo2.addColumn("id");
+        if (camposTabla){
+            modelo2.addColumn("nif");
+            modelo2.addColumn("Nombre");
+            modelo2.addColumn("tipo");
+            modelo2.addColumn("oficio");
+            modelo2.addColumn("salario");
+            modelo2.addColumn("id");
+            camposTabla=false;
+        }
+        int rowCount = modelo2.getRowCount();
+
+        for (int i = rowCount - 1; i >= 0; i--) {
+            modelo2.removeRow(i);
+        }
             for (EmpleadoVO empleado : empleadosList) {
                 Object[] datos ={empleado.getNif(),empleado.getNombre(),empleado.getTipo(),empleado.getOficio(),empleado.getSalario(),empleado.getId()};
                 modelo2.addRow(datos);
