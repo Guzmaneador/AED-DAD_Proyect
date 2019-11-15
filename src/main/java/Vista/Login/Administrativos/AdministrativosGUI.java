@@ -33,6 +33,7 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         EmpleadoVO empleadoTratado;
         DepartamentoVO departamento;
         ArrayList<EmpleadoVO> listaEmpleados;
+        ArrayList<DepartamentoVO> listaDepartamentosVO ;
         int id ;
 
     public AdministrativosGUI(ArrayList<Integer> listaDepartamento,EmpleadoVO empleado) {
@@ -137,10 +138,11 @@ public class AdministrativosGUI extends javax.swing.JFrame {
         crearDepartamentoButton = new javax.swing.JButton();
         borrarDepartamentoButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        depatamentosTable = new javax.swing.JTable();
+        departamentoTable = new javax.swing.JTable();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        empleadosDepartamentoTable = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
+        nombreDepartamentoComboBox = new javax.swing.JComboBox<>();
         dniUser = new javax.swing.JLabel();
         nombreUser = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -747,7 +749,7 @@ public class AdministrativosGUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        depatamentosTable.setModel(new javax.swing.table.DefaultTableModel(
+        departamentoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -755,9 +757,9 @@ public class AdministrativosGUI extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane2.setViewportView(depatamentosTable);
+        jScrollPane2.setViewportView(departamentoTable);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        empleadosDepartamentoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -765,9 +767,15 @@ public class AdministrativosGUI extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane4.setViewportView(jTable2);
+        jScrollPane4.setViewportView(empleadosDepartamentoTable);
 
         jLabel2.setText("Empleados del departamento:");
+
+        nombreDepartamentoComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombreDepartamentoComboBoxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -788,7 +796,10 @@ public class AdministrativosGUI extends javax.swing.JFrame {
                         .addGap(64, 64, 64)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 558, Short.MAX_VALUE)
-                            .addComponent(jLabel2)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(nombreDepartamentoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane4))))
                 .addContainerGap(65, Short.MAX_VALUE))
         );
@@ -803,11 +814,13 @@ public class AdministrativosGUI extends javax.swing.JFrame {
                 .addComponent(modificarDepartamentoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23)
-                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(nombreDepartamentoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
 
         empresasTabbedPane.addTab("Departamentos", jPanel2);
@@ -957,6 +970,7 @@ public class AdministrativosGUI extends javax.swing.JFrame {
             borrarDepartamentoButton.setVisible(true);            
             departamento=controlador.obtenerDepartamento(Integer.parseInt((String)departamentoComboBox.getSelectedItem()));
             cargarDatosDepartamento();
+            cargarTablaEmpleadosDepartamento(controlador.selecionarEmpleadosPorIdControlador((int)departamentoComboBox.getSelectedItem()));
         }else{
             modificarDepartamentoPanel.setVisible(false);
         }
@@ -1185,6 +1199,18 @@ public class AdministrativosGUI extends javax.swing.JFrame {
     private void passwordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_passwordField1ActionPerformed
+
+    private void nombreDepartamentoComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreDepartamentoComboBoxActionPerformed
+               String nombre = (String)nombreDepartamentoComboBox.getSelectedItem();
+                 if(!((String)nombreDepartamentoComboBox.getSelectedItem()).equals("...")){
+                  for (DepartamentoVO departamento : listaDepartamentosVO) {
+                      if(departamento.getNombre().equals(nombre)){
+                          cargarTablaEmpleadosDepartamento(controlador.selecionarEmpleadosPorIdControlador(departamento.getId()));
+                      }
+                  }
+                 }
+               
+    }//GEN-LAST:event_nombreDepartamentoComboBoxActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
@@ -1235,10 +1261,11 @@ public class AdministrativosGUI extends javax.swing.JFrame {
     private javax.swing.JButton crearDepartamentoButton;
     private javax.swing.JButton crearEmpleadoButton;
     private javax.swing.JComboBox<String> departamentoComboBox;
-    private javax.swing.JTable depatamentosTable;
+    private javax.swing.JTable departamentoTable;
     private javax.swing.JComboBox<String> dniComboBox;
     private javax.swing.JLabel dniUser;
     private javax.swing.JRadioButton empleadoRadioButton;
+    private javax.swing.JTable empleadosDepartamentoTable;
     private javax.swing.JTable empleadosTable;
     private javax.swing.JTabbedPane empresasTabbedPane;
     private javax.swing.JTextField fechaAltaTextField;
@@ -1276,7 +1303,6 @@ public class AdministrativosGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JLabel logoUser;
     private javax.swing.JCheckBox masInfoCheckBox;
     private javax.swing.JPanel modificarDepartamentoPanel;
@@ -1288,6 +1314,7 @@ public class AdministrativosGUI extends javax.swing.JFrame {
     private javax.swing.JLabel nifLabel1;
     private javax.swing.JTextField nifTextField;
     private javax.swing.JLabel nifTextField1;
+    private javax.swing.JComboBox<String> nombreDepartamentoComboBox;
     private javax.swing.JTextField nombreEmpleadoTextField;
     private javax.swing.JLabel nombreLabel;
     private javax.swing.JLabel nombreLabel1;
@@ -1338,6 +1365,13 @@ public class AdministrativosGUI extends javax.swing.JFrame {
                 departamentoComboBox.addItem(Integer.toString(departamento));
             }
         departamentoComboBox.addItem("Crear");
+        nombreDepartamentoComboBox.addItem("...");
+        listaDepartamentosVO = controlador.listaDepartamentosVOControlador();
+            for (DepartamentoVO departamento : listaDepartamentosVO) {
+                nombreDepartamentoComboBox.addItem(departamento.getNombre());
+            }
+        
+        
     }
     public void cargarDatosDepartamento(){
         idSpinner.setValue(departamento.getId());
@@ -1355,7 +1389,7 @@ public class AdministrativosGUI extends javax.swing.JFrame {
     public void crearDepartamentosTabla(){
         ArrayList<DepartamentoVO> listaDepartamentoVO;
         listaDepartamentoVO= controlador.listaDepartamentosVOControlador();
-        DefaultTableModel modelo = (DefaultTableModel)depatamentosTable.getModel();
+        DefaultTableModel modelo = (DefaultTableModel)departamentoTable.getModel();
         modelo.addColumn("Id");
         modelo.addColumn("Nombre");
         modelo.addColumn("Ubicacion");
@@ -1575,16 +1609,16 @@ public class AdministrativosGUI extends javax.swing.JFrame {
             return existe;
     }
     public void cargarTablaEmpleadosDepartamento(ArrayList <EmpleadoVO> empleadosList){
-        DefaultTableModel modelo = (DefaultTableModel)empleadosTable.getModel();
-        modelo.addColumn("mif");
-        modelo.addColumn("Nombre");
-        modelo.addColumn("tipo");
-        modelo.addColumn("oficio");
-        modelo.addColumn("salario");
-        modelo.addColumn("id");
-            for (EmpleadoVO empleado : listaEmpleados) {
+        DefaultTableModel modelo2 = (DefaultTableModel)empleadosDepartamentoTable.getModel();
+        modelo2.addColumn("nif");
+        modelo2.addColumn("Nombre");
+        modelo2.addColumn("tipo");
+        modelo2.addColumn("oficio");
+        modelo2.addColumn("salario");
+        modelo2.addColumn("id");
+            for (EmpleadoVO empleado : empleadosList) {
                 Object[] datos ={empleado.getNif(),empleado.getNombre(),empleado.getTipo(),empleado.getOficio(),empleado.getSalario(),empleado.getId()};
-                modelo.addRow(datos);
+                modelo2.addRow(datos);
             }
         
     }

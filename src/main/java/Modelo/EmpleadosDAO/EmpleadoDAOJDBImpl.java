@@ -198,7 +198,7 @@ public class EmpleadoDAOJDBImpl implements EmpleadoDAO{
         ArrayList<EmpleadoVO> listaEmpleados = new ArrayList<>();
         try {
             conexion = pool.getConnection();
-            PreparedStatement miPreStatment= conexion.prepareCall(SQL_INSERT);
+            PreparedStatement miPreStatment= conexion.prepareCall(SQL_SELECT_EMPLEADO_ID);
             miPreStatment.setInt(1, id);
             System.out.println(miPreStatment);
             resultado = miPreStatment.executeQuery();
