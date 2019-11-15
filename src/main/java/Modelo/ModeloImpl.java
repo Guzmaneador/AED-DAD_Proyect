@@ -32,6 +32,11 @@ public class ModeloImpl implements Modelo{
                  resultadoUpdate = crearDBTablas.executeUpdate(comando);
 //                 System.out.println(resultadoUpdate);
         }
+//        crearDBTablas.executeLargeUpdate("DELIMITER $$ "+
+//                                    "CREATE PROCEDURE aumentarSalario (IN total DOUBLE, IN dni varchar(9)) "+
+//                                    "BEGIN "+
+//                                    "UPDATE empleados SET salario = total WHERE nif= dni; "+
+//                                "END $$");
         
 //        conexion.close();
     }
@@ -85,6 +90,13 @@ public class ModeloImpl implements Modelo{
     public void updateNombreModelo(String nif,String nombre,String password){
         empleadoDao.updateNombre(nif, nombre,password);
     }
+    public void actualizarSalarioModelo(Double salario, String dni){
+        empleadoDao.actualizarSalario(salario, dni);
+    }
     
+    @Override
+    public ArrayList<EmpleadoVO> selecionarEmpleadosPorIdModelo(int id){
+        return empleadoDao.selecionarEmpleadosPorId(id);
+    }
 
 }

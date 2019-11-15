@@ -108,17 +108,29 @@ public class ControladorImpl implements Controlador {
         modelo.borrarEmpleadoModelo(nif);
     }
     
+    @Override
     public void crearEmpleadoControlador(EmpleadoVO empleado,String password){
         modelo.crearEmpleadoModelo(empleado,password);
     }
     
+    @Override
     public void updateNombreControlador(String nif,String nombre){
         modelo.updateNombreModelo(nif,nombre);
     }
+    @Override
     public void updateNombreControlador(String nif,String nombre,String password){
         modelo.updateNombreModelo(nif,nombre,password);
     }
+    @Override
+    public void actualizarSalarioControlador(Double salario, String dni){
+        modelo.actualizarSalarioModelo(salario,dni);
+    }
     
+    @Override
+    public ArrayList<EmpleadoVO> selecionarEmpleadosPorIdControlador(int id){
+        return modelo.selecionarEmpleadosPorIdModelo(id);
+        
+    }
     
    
 

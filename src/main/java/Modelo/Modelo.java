@@ -24,5 +24,6 @@ public interface Modelo {
     public void crearEmpleadoModelo(EmpleadoVO empleado,String password);
     public void updateNombreModelo(String nif,String nombre);
     public void updateNombreModelo(String nif,String nombre,String password);
-    
+    public void actualizarSalarioModelo(Double salario, String dni);
+    public ArrayList<EmpleadoVO> selecionarEmpleadosPorIdModelo(int id);
 }

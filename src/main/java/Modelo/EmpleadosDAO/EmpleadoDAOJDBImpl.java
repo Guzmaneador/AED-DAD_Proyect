@@ -2,6 +2,7 @@ package Modelo.EmpleadosDAO;
 
 import Modelo.DepartamentosDAO.DepartamentoDAOJDBCImpl;
 import Modelo.PoolConexiones;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,12 +26,15 @@ public class EmpleadoDAOJDBImpl implements EmpleadoDAO{
     ResultSet resultado ;
     private final String SQL_SELECT_ALL= "SELECT * FROM empleados";
     private final String SQL_SELECT_EMPLEADO= "SELECT * FROM empleados WHERE nombre=?";
+    private final String SQL_SELECT_EMPLEADO_ID= "SELECT * FROM empleados WHERE id=?";
     private final String SQL_UPDATE_PASSWORD="UPDATE login SET password=AES_ENCRYPT('NoLoVesJeJe', ?) WHERE nif=?";
     private final String SQL_UPDATE = "UPDATE empleados SET nif=?, nombre=?, tipo=?, oficio=?, fecha_alta=?, salario=?, id=? WHERE nif=?";
     private final String SQL_UPDATE_NOMBRE= "UPDATE empleados SET nombre=? WHERE nif=?";
     private final String SQL_DELETE = "DELETE FROM empleados WHERE nif=?";
     private final String SQL_INSERT = "Insert INTO empleados VALUES (?,?,?,?,?,?,?);";
     private final String SQL_INSERT_PASSWORD = "INSERT INTO login VALUES (?,AES_ENCRYPT('NoLoVesJeJe', ?));";
+    private final String SQL_PROCEDURE_aumentarSalario= "{call aumentarSalario (?,?)}";
+
 
     public EmpleadoDAOJDBImpl() {
     }
@@ -176,7 +180,39 @@ public class EmpleadoDAOJDBImpl implements EmpleadoDAO{
         }
         
     }
-     
+    public void actualizarSalario(double salario, String dni){
+        try {
+            conexion = pool.getConnection();
+            CallableStatement cst = conexion.prepareCall(SQL_PROCEDURE_aumentarSalario);
+             cst.setDouble(1, salario);
+             cst.setString(2, dni);
+//             cst.registerOutParameter(3, java.sql.Types.VARCHAR);
+            cst.execute();
+////            String dato = cst.getString(3);
+        } catch (SQLException ex) {
+            Logger.getLogger(EmpleadoDAOJDBImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public ArrayList<EmpleadoVO> selecionarEmpleadosPorId(int id){
+        ArrayList<EmpleadoVO> listaEmpleados = new ArrayList<>();
+        try {
+            conexion = pool.getConnection();
+            PreparedStatement miPreStatment= conexion.prepareCall(SQL_INSERT);
+            miPreStatment.setInt(1, id);
+            System.out.println(miPreStatment);
+            resultado = miPreStatment.executeQuery();
+            while (resultado.next()){
+                listaEmpleados.add(new EmpleadoVO(resultado.getString("nif"),resultado.getString("nombre"),resultado.getString("tipo"),resultado.getString("oficio"),resultado.getDate("fecha_alta"),resultado.getDouble("salario"),resultado.getInt("id")));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(EmpleadoDAOJDBImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return listaEmpleados;
+    }
+    
   
 
 }

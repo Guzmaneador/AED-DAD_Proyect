@@ -63,6 +63,15 @@ public class VistaImpl implements Vista{
         comandosSQLInicio.add("INSERT INTO login VALUES ('17845789K',AES_ENCRYPT('NoLoVesJeJe', 'Antonio1'));");
         comandosSQLInicio.add("Insert INTO login VALUES ('35987468H',AES_ENCRYPT('NoLoVesJeJe', 'Susana1'));");
         comandosSQLInicio.add("Insert INTO login VALUES ('73155874Q',AES_ENCRYPT('NoLoVesJeJe', 'Roberto1'));");
+        
+        
+//        comandosSQLInicio.add("DELIMITER $$"+
+//                                    "CREATE PROCEDURE `aumentarSalario` (IN total DOUBLE,IN dni varchar(9))"+
+//                                    "BEGIN"+
+//                                    "UPDATE empleados SET salario = total WHERE nif= dni;"+
+//                                "END $$");
+        
+        
 
 
     }

@@ -1,5 +1,7 @@
 package Modelo;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 /**
@@ -19,4 +21,7 @@ public class PoolConexiones {
 public BasicDataSource getPoolConexion(){
     return poolConexiones;
 }
+//public Connection getPoolConexion() throws SQLException{
+//    return poolConexiones.getConnection();
+//}
 }

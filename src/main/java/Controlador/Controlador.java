@@ -22,6 +22,6 @@ public interface Controlador {
     public void crearEmpleadoControlador(EmpleadoVO empleado,String password);
     public void updateNombreControlador(String nif,String nombre);
     public void updateNombreControlador(String nif,String nombre,String password);
-    
-    
+    public void actualizarSalarioControlador(Double salario,String dni);
+    public ArrayList<EmpleadoVO> selecionarEmpleadosPorIdControlador(int id);
 }
