@@ -18,17 +18,17 @@ public class Login {
     String nif,tipo;
     String SQL_SELECT_EMPLEADOS= "SELECT nombre, tipo FROM empleados";
     String SQL_SELECT_NIF="SELECT nif FROM `empleados` WHERE nombre=?";
-//    String SQL_COMPARE_PASSWORD="SELECT AES_DECRYPT(password) FROM login WHERE nif=?";
+
     String SQL_COMPARE_PASSWORD="SELECT AES_DECRYPT(password, ?) FROM login WHERE nif=?";
     ResultSet resultado ;
     Connection conexion;
-    DataSource pool = new PoolConexiones().getPoolConexion();
+//    DataSource pool = new PoolConexiones().getPoolConexion();
 
     public Login(ArrayList<String> userPass,Connection conexion) throws SQLException {
         this.usuario = userPass.get(0);
         this.contraseña = userPass.get(1);
-        this.conexion=pool.getConnection();
-//        analizarDatos();Antonio
+        this.conexion = ConexionMySQL.getConexion();
+
         /*
         Modelo devuelve un objeto EmpleadosVO de tipo empleado el cual trata la interfa
         Cambia los valores de de este en caso de que ek usuario los modifique 
@@ -72,32 +72,28 @@ public class Login {
        if(resultado.next())
         nif=resultado.getString("nif");
        
-//        System.out.println(nif);
     }
-    //SELECT AES_DECRYPT(password, 'Antonio1') FROM login WHERE nif='17845789K';
+
     public boolean compararPassword() throws SQLException{
         String clave= "";
        boolean contraseñaCorrecta =false;
        PreparedStatement miPreStatment= conexion.prepareCall(SQL_COMPARE_PASSWORD);
        miPreStatment.setString(1, contraseña);
-//       miPreStatment.setString(1, contraseña);
+
        miPreStatment.setString(2, nif);
-//        System.out.println(miPreStatment);
+
        
        resultado=miPreStatment.executeQuery();
        ResultSetMetaData rsmd = resultado.getMetaData();
        if(resultado.next())
               clave=resultado.getString(rsmd.getColumnName(1));
-//            System.out.println(rsmd.getColumnName(1));
        if(clave != null)    
                    contraseñaCorrecta= true;
 
 
-//        System.out.println(clave);
+
         return contraseñaCorrecta;
-//        return false;
-        
-        
+     
     }
 
 }

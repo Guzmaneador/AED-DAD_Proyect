@@ -26,12 +26,12 @@ public class ModeloImpl implements Modelo{
     public void start(ArrayList<String> comandosSQL) throws SQLException{
         conexion = ConexionMySQL.getConexion();
         
-        Statement crearDBTablas = conexion.createStatement();
-        int resultadoUpdate;
-        for (String comando : comandosSQL) {
-                 resultadoUpdate = crearDBTablas.executeUpdate(comando);
-//                 System.out.println(resultadoUpdate);
-        }
+//        Statement crearDBTablas = conexion.createStatement();
+//        int resultadoUpdate;
+//        for (String comando : comandosSQL) {
+//                 resultadoUpdate = crearDBTablas.executeUpdate(comando);
+////                 System.out.println(resultadoUpdate);
+//        }
 //        crearDBTablas.executeLargeUpdate("DELIMITER $$ "+
 //                                    "CREATE PROCEDURE aumentarSalario (IN total DOUBLE, IN dni varchar(9)) "+
 //                                    "BEGIN "+
